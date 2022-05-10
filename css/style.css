@@ -1,31 +1,31 @@
 #container {
-width: 900px;
-height: 900px;
-border: 1px solid black;
-margin: 0 auto;
-margin-top: 125px;
-
+  width: 900px;
+  height: 900px;
+  border: 1px solid black;
+  margin: 0 auto;
+  margin-top: 125px;
 }
 
-#barra-superior{
-height: 100px;
-border: 1px solid red;
+#barra-superior {
+  height: 100px;
+  border: 1px solid red;
 }
-
 
 #map {
-height: 700px;
-border: 1px solid rgb(1, 7, 10);
-background-color:rgb(30, 243, 243);
+  height: 700px;
+  border: 1px solid rgb(1, 7, 10);
+  background-color: rgb(30, 243, 243);
 }
 
 #barra-inferior {
-height: 95px;
-border: 1px solid green;
+  height: 95px;
+  border: 1px solid green;
 }
 
 #hero {
-    height: 40px;
-    width: 40px;
-    background-color: black;
+  position: absolute;
+  border: 1px solid black;
+  background-color: black;
+  width: 40px;
+  height: 40px;
 }
