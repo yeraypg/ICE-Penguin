@@ -1,7 +1,6 @@
 
-
 //Constructor New Game
-function IcePinguin() {
+function IcePinguin() { 
   self = this;
   this.timerId;
   this.penguin = new Hero();
@@ -34,10 +33,18 @@ function IcePinguin() {
 
     })
   };
-
+// this.paintHero = function(){
+//   this.elem.style.top = this.posY + "px"
+//   this.elem.style.left = this.posX + "px"
+// }
   //StartGame
   this.startGame = function () {
-    this.mapKeys();
+    self.mapKeys();
+    // game.penguin.borderColision()
+    //  this.timerId = setInterval(function(){
+    //    self.paintHero();
+       
+    //  },100)
   };
 }
 
