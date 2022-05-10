@@ -1,4 +1,4 @@
-var elem = document.getElementById("container");
+var elem = document.getElementById("hero");
 console.log(elem);
 
 //Constructor New Game
@@ -50,25 +50,26 @@ function Char() {}
 //Constructor Hero
 function Hero() {
   this.direction = "none";
-  this.speed = 3;
+  this.speed = 3000;
   this.posX = 40;
   this.posY = 40;
 
+  //Move Control
   this.moveUp = function () {
-    this.posY -= this.speed
-    console.log("arriba2")
+    this.posY -= this.speed;
+    console.log("arriba2");
   };
   this.moveDown = function () {
-    this.posY += this.speed
-    console.log("abajo2")
+    this.posY += this.speed;
+    console.log("abajo2");
   };
   this.moveRight = function () {
-    this.posX += this.speed
-    console.log("derecha2")
+    this.posX += this.speed;
+    console.log("derecha2");
   };
   this.moveLeft = function () {
-    this.posX -= this.speed
-    console.log("izquierda2")
+    this.posX -= this.speed;
+    console.log("izquierda2");
   };
   this.moveNone = function () {
     this.speed = 0;
