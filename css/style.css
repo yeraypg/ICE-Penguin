@@ -24,4 +24,8 @@ height: 95px;
 border: 1px solid green;
 }
 
-
+#hero {
+    height: 40px;
+    width: 40px;
+    background-color: black;
+}
