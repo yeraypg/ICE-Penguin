@@ -1,4 +1,4 @@
-var elem = document.getElementById("hero");
+
 
 //Constructor New Game
 function IcePinguin() {
