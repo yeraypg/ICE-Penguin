@@ -1,6 +1,5 @@
-
 //Constructor New Game
-function IcePinguin() { 
+function IcePinguin() {
   self = this;
   this.timerId;
   this.penguin = new Hero();
@@ -25,33 +24,27 @@ function IcePinguin() {
           self.penguin.direction = "left";
           game.penguin.moveLeft();
           break;
-        
       }
     });
-    document.addEventListener("keyup", function (e){
+    document.addEventListener("keyup", function (e) {
       game.penguin.moveNone();
-
-    })
+    });
   };
-// this.paintHero = function(){
-//   this.elem.style.top = this.posY + "px"
-//   this.elem.style.left = this.posX + "px"
-// }
+
+  this.moveControl = function () {
+    game.penguin.paintHero();
+  };
+
   //StartGame
   this.startGame = function () {
     self.mapKeys();
-    // game.penguin.borderColision()
-    //  this.timerId = setInterval(function(){
-    //    self.paintHero();
-       
-    //  },100)
+    this.moveControl();
   };
 }
 
 //Constructor Char
 function Char() {}
 
-
 //Game
 let game = new IcePinguin();
-game.startGame();
+this.timerId = setInterval(this.startGame(), 100);

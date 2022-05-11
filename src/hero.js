@@ -1,5 +1,3 @@
-
-
 //Constructor Hero
 function Hero() {
   this.elem = document.getElementById("hero");
@@ -8,34 +6,29 @@ function Hero() {
   this.posX = 63;
   this.posY = 63;
 
-  //Move Control
+  //Move Control - Asigna el nuevo valor de la posición de Hero
+
   this.moveUp = function () {
     this.posY -= this.speed;
-    this.elem.style.top = this.posY + "px"
   };
+
   this.moveDown = function () {
     this.posY += this.speed;
-    this.elem.style.top = this.posY + "px"
   };
+
   this.moveRight = function () {
     this.posX += this.speed;
-    this.elem.style.left = this.posX + "px"
   };
+
   this.moveLeft = function () {
     this.posX -= this.speed;
-    this.elem.style.left = this.posX + "px"
-  };
-  this.moveNone = function () {
-
   };
 
-  // this.borderColision = function() {
-  //   if (this.direction == "up") {
-  //     if (this.posY + this.speed < 63) {
-  //       this.moveUp()
-  //     } else {
-  //       this.moveNone
-  //     }
-  //   }
-  // }
+  this.moveNone = function () {};
+
+  //Actualizar posición de Hero
+  this.paintHero = function () {
+    this.elem.style.top = this.posY + "px";
+    this.elem.style.left = this.posX + "px";
+  };
 }
