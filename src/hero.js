@@ -28,7 +28,7 @@ function Hero() {
     
   };
 
-  //Actualizar posición de Hero
+  //Actualizar posición de Hero en DOM
   this.paintHero = function () {
     this.hero.style.top = this.posY + "px";
     this.hero.style.left = this.posX + "px";

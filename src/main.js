@@ -13,21 +13,17 @@ function IcePinguin() {
           break;
         case "ArrowRight":
           self.penguin.direction = "right";
-          //game.penguin.moveRight();
           break;
         case "ArrowDown":
           self.penguin.direction = "down";
-          //game.penguin.moveDown();
           break;
         case "ArrowLeft":
           self.penguin.direction = "left";
-          //game.penguin.moveLeft();
           break;
       }
     });
     document.addEventListener("keyup", function (e) {
-      self.penguin.direction = "none"
-      
+      self.penguin.direction = "none";
     });
   };
 
@@ -42,12 +38,14 @@ function IcePinguin() {
     this.timerId = setInterval(this.moveControl, 100);
   };
 
+  // Detectar colisión con los bordes
   this.borderCollision = function () {
     switch (this.penguin.direction) {
       case "up":
         if (this.penguin.posY - this.penguin.speed > 55) {
           game.penguin.moveUp();
-          game.penguin.hero.style.backgroundImage = "url(/source/graphics/penguiup.png)"
+          game.penguin.hero.style.backgroundImage =
+            "url(/source/graphics/penguiup.png)";
         } else {
           game.penguin.direction = "none";
           game.penguin.moveNone();
@@ -56,7 +54,8 @@ function IcePinguin() {
       case "right":
         if (this.penguin.posX + this.penguin.speed < 920) {
           game.penguin.moveRight();
-          game.penguin.hero.style.backgroundImage = "url(/source/graphics/penguiright.png)"
+          game.penguin.hero.style.backgroundImage =
+            "url(/source/graphics/penguiright.png)";
         } else {
           game.penguin.direction = "none";
           game.penguin.moveNone();
@@ -65,7 +64,8 @@ function IcePinguin() {
       case "down":
         if (this.penguin.posY + this.penguin.speed < 720) {
           game.penguin.moveDown();
-          game.penguin.hero.style.backgroundImage = "url(/source/graphics/penguidown.png)"
+          game.penguin.hero.style.backgroundImage =
+            "url(/source/graphics/penguidown.png)";
         } else {
           game.penguin.direction = "none";
           game.penguin.moveNone();
@@ -74,15 +74,17 @@ function IcePinguin() {
       case "left":
         if (this.penguin.posX - this.penguin.speed > 60) {
           game.penguin.moveLeft();
-          game.penguin.hero.style.backgroundImage = "url(/source/graphics/penguileft.png)"
+          game.penguin.hero.style.backgroundImage =
+            "url(/source/graphics/penguileft.png)";
         } else {
           game.penguin.direction = "none";
           game.penguin.moveNone();
         }
         break;
       case "none":
-        game.penguin.hero.style.backgroundImage = "url(/source/graphics/penguistop.png)"  
-        break;  
+        game.penguin.hero.style.backgroundImage =
+          "url(/source/graphics/penguistop.png)";
+        break;
     }
   };
 }
@@ -93,4 +95,3 @@ function Char() {}
 //Game
 let game = new IcePinguin();
 game.startGame();
-
