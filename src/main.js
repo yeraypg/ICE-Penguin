@@ -3,8 +3,20 @@ function IcePinguin() {
   self = this;
   this.timerId;
   this.penguin = new Hero();
-  this.tableMap = [{row: 2, col: 2},{row: 2, col: 4},{row: 2, col: 6},{row: 2, col: 8},{row: 2, col: 10},{row: 2, col: 12},{row: 2, col: 14}];
-  console.log(this.tableMap[3]);
+  this.tableMap = [[{row: 2, col: 2},{row: 2, col: 4},{row: 2, col: 6},{row: 2, col: 8},{row: 2, col: 10},{row: 2, col: 12},{row: 2, col: 14}],[{row: 4, col: 2},{row: 4, col: 4},{row: 4, col: 6},{row: 4, col: 8},{row: 4, col: 10},{row: 4, col: 12},{row: 4, col: 14}],[{row: 6, col: 2},{row: 6, col: 4},{row: 6, col: 6},{row: 6, col: 8},{row: 6, col: 10},{row: 6, col: 12},{row: 6, col: 14}],[{row: 8, col: 2},{row: 8, col: 4},{row: 8, col: 6},{row: 8, col: 8},{row: 8, col: 10},{row: 8, col: 12},{row: 8, col: 14}],[{row: 10, col: 2},{row: 10, col: 4},{row: 10, col: 6},{row: 10, col: 8},{row: 10, col: 10},{row: 10, col: 12},{row: 10, col: 14}]];
+
+  this.generateIceMap = function() {
+    for (var i = 0; i < this.tableMap.length; i++) {
+      for (var j = 0; j < this.tableMap.length; j++) {
+        var cell = document.querySelector(`tr#row${this.tableMap[i][j].row} > td#col${this.tableMap[i][j].col}`)
+        console.log(`tr#row${this.tableMap[i][j].row} > td#col${this.tableMap[i][j].col}`)
+        cell.classList.add("bloquehielo")
+        // console.log(this.tableMap[i][j].row)
+        // console.log(this.tableMap[i][j].col)
+      }
+  }
+}
+  // console.log(this.tableMap[3][3].row);
   //Key-map
   this.mapKeys = function () {
     document.addEventListener("keydown", function (e) {
@@ -31,6 +43,7 @@ function IcePinguin() {
   this.moveControl = function () {
     self.borderCollision();
     game.penguin.paintHero();
+    self.generateIceMap();
   };
 
   //StartGame
