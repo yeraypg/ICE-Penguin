@@ -1,6 +1,6 @@
 //Constructor Hero
 function Hero() {
-  this.elem = document.getElementById("hero");
+  this.hero = document.getElementById("hero");
   this.direction = "none";
   this.speed = 10;
   this.posX = 63;
@@ -28,7 +28,8 @@ function Hero() {
 
   //Actualizar posición de Hero
   this.paintHero = function () {
-    this.elem.style.top = this.posY + "px";
-    this.elem.style.left = this.posX + "px";
+    this.hero.style.top = this.posY + "px";
+    this.hero.style.left = this.posX + "px";
   };
 }
+
