@@ -3,7 +3,8 @@ function IcePinguin() {
   self = this;
   this.timerId;
   this.penguin = new Hero();
-
+  this.tableMap = [{row: 2, col: 2},{row: 2, col: 4},{row: 2, col: 6},{row: 2, col: 8},{row: 2, col: 10},{row: 2, col: 12},{row: 2, col: 14}];
+  console.log(this.tableMap[3]);
   //Key-map
   this.mapKeys = function () {
     document.addEventListener("keydown", function (e) {
@@ -35,7 +36,7 @@ function IcePinguin() {
   //StartGame
   this.startGame = function () {
     self.mapKeys();
-    this.timerId = setInterval(this.moveControl, 100);
+    this.timerId = setInterval(this.moveControl, 50);
   };
 
   // Detectar colisión con los bordes
@@ -46,40 +47,28 @@ function IcePinguin() {
           game.penguin.moveUp();
           game.penguin.hero.style.backgroundImage =
             "url(/source/graphics/penguiup.png)";
-        } else {
-          game.penguin.direction = "none";
-          game.penguin.moveNone();
-        }
+        } else {game.penguin.heroStop()}
         break;
       case "right":
         if (this.penguin.posX + this.penguin.speed < 920) {
           game.penguin.moveRight();
           game.penguin.hero.style.backgroundImage =
             "url(/source/graphics/penguiright.png)";
-        } else {
-          game.penguin.direction = "none";
-          game.penguin.moveNone();
-        }
+        } else {game.penguin.heroStop()}
         break;
       case "down":
         if (this.penguin.posY + this.penguin.speed < 720) {
           game.penguin.moveDown();
           game.penguin.hero.style.backgroundImage =
             "url(/source/graphics/penguidown.png)";
-        } else {
-          game.penguin.direction = "none";
-          game.penguin.moveNone();
-        }
+        } else {game.penguin.heroStop()}
         break;
       case "left":
         if (this.penguin.posX - this.penguin.speed > 60) {
           game.penguin.moveLeft();
           game.penguin.hero.style.backgroundImage =
             "url(/source/graphics/penguileft.png)";
-        } else {
-          game.penguin.direction = "none";
-          game.penguin.moveNone();
-        }
+        } else {game.penguin.heroStop()}
         break;
       case "none":
         game.penguin.hero.style.backgroundImage =

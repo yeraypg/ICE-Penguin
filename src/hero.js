@@ -33,5 +33,10 @@ function Hero() {
     this.hero.style.top = this.posY + "px";
     this.hero.style.left = this.posX + "px";
   };
+
+  this.heroStop = function () {
+    this.direction = "none";
+    this.moveNone();
+  }
 }
 

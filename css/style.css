@@ -22,7 +22,7 @@
   margin: 60px auto;
   height: 700px;
   width: 900px;
-  background-image: url(/source/graphics/mapfloor.png)
+  background-image: url(/source/graphics/mapfloor.png);
 }
 
 #barra-inferior {
@@ -35,5 +35,13 @@
   background-image: url(/source/graphics/penguistop.png);
   width: 50px;
   height: 50px;
-  
+}
+
+table{
+  height:700px;
+  width: 900px;
+}
+
+.bloquehielo{
+  background-color: black;
 }
