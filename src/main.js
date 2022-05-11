@@ -47,6 +47,7 @@ function IcePinguin() {
       case "up":
         if (this.penguin.posY - this.penguin.speed > 55) {
           game.penguin.moveUp();
+          game.penguin.hero.style.backgroundImage = "url(/source/graphics/penguiup.png)"
         } else {
           game.penguin.direction = "none";
           game.penguin.moveNone();
@@ -55,6 +56,7 @@ function IcePinguin() {
       case "right":
         if (this.penguin.posX + this.penguin.speed < 920) {
           game.penguin.moveRight();
+          game.penguin.hero.style.backgroundImage = "url(/source/graphics/penguiright.png)"
         } else {
           game.penguin.direction = "none";
           game.penguin.moveNone();
@@ -63,6 +65,7 @@ function IcePinguin() {
       case "down":
         if (this.penguin.posY + this.penguin.speed < 720) {
           game.penguin.moveDown();
+          game.penguin.hero.style.backgroundImage = "url(/source/graphics/penguidown.png)"
         } else {
           game.penguin.direction = "none";
           game.penguin.moveNone();
@@ -71,11 +74,15 @@ function IcePinguin() {
       case "left":
         if (this.penguin.posX - this.penguin.speed > 60) {
           game.penguin.moveLeft();
+          game.penguin.hero.style.backgroundImage = "url(/source/graphics/penguileft.png)"
         } else {
           game.penguin.direction = "none";
           game.penguin.moveNone();
         }
         break;
+      case "none":
+        game.penguin.hero.style.backgroundImage = "url(/source/graphics/penguistop.png)"  
+        break;  
     }
   };
 }

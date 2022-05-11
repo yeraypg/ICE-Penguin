@@ -24,7 +24,9 @@ function Hero() {
     this.posX -= this.speed;
   };
 
-  this.moveNone = function () {};
+  this.moveNone = function () {
+    
+  };
 
   //Actualizar posición de Hero
   this.paintHero = function () {
