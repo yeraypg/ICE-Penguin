@@ -3,20 +3,56 @@ function IcePinguin() {
   self = this;
   this.timerId;
   this.penguin = new Hero();
-  this.tableMap = [[{row: 2, col: 2},{row: 2, col: 4},{row: 2, col: 6},{row: 2, col: 8},{row: 2, col: 10},{row: 2, col: 12},{row: 2, col: 14}],[{row: 4, col: 2},{row: 4, col: 4},{row: 4, col: 6},{row: 4, col: 8},{row: 4, col: 10},{row: 4, col: 12},{row: 4, col: 14}],[{row: 6, col: 2},{row: 6, col: 4},{row: 6, col: 6},{row: 6, col: 8},{row: 6, col: 10},{row: 6, col: 12},{row: 6, col: 14}],[{row: 8, col: 2},{row: 8, col: 4},{row: 8, col: 6},{row: 8, col: 8},{row: 8, col: 10},{row: 8, col: 12},{row: 8, col: 14}],[{row: 10, col: 2},{row: 10, col: 4},{row: 10, col: 6},{row: 10, col: 8},{row: 10, col: 10},{row: 10, col: 12},{row: 10, col: 14}]];
-
-  this.generateIceMap = function() {
+  this.tableMap = [
+    { row: 2, col: 2 },
+    { row: 2, col: 4 },
+    { row: 2, col: 6 },
+    { row: 2, col: 8 },
+    { row: 2, col: 10 },
+    { row: 2, col: 12 },
+    { row: 2, col: 14 },
+    { row: 4, col: 2 },
+    { row: 4, col: 4 },
+    { row: 4, col: 6 },
+    { row: 4, col: 8 },
+    { row: 4, col: 10 },
+    { row: 4, col: 12 },
+    { row: 4, col: 14 },
+    { row: 6, col: 2 },
+    { row: 6, col: 4 },
+    { row: 6, col: 6 },
+    { row: 6, col: 8 },
+    { row: 6, col: 10 },
+    { row: 6, col: 12 },
+    { row: 6, col: 14 },
+    { row: 8, col: 2 },
+    { row: 8, col: 4 },
+    { row: 8, col: 6 },
+    { row: 8, col: 8 },
+    { row: 8, col: 10 },
+    { row: 8, col: 12 },
+    { row: 8, col: 14 },
+    { row: 10, col: 2 },
+    { row: 10, col: 4 },
+    { row: 10, col: 6 },
+    { row: 10, col: 8 },
+    { row: 10, col: 10 },
+    { row: 10, col: 12 },
+    { row: 10, col: 14 },
+  ];
+  //Generate Fixed Ice Blocks 
+  this.generateIceMap = function () {
     for (var i = 0; i < this.tableMap.length; i++) {
-      for (var j = 0; j < this.tableMap.length; j++) {
-        var cell = document.querySelector(`tr#row${this.tableMap[i][j].row} > td#col${this.tableMap[i][j].col}`)
-        console.log(`tr#row${this.tableMap[i][j].row} > td#col${this.tableMap[i][j].col}`)
-        cell.classList.add("bloquehielo")
-        // console.log(this.tableMap[i][j].row)
-        // console.log(this.tableMap[i][j].col)
+      var cell = document.querySelector(
+        `tr#row${this.tableMap[i].row} > td#col${this.tableMap[i].col}`
+      );
+      console.log(
+        `tr#row${this.tableMap[i].row} > td#col${this.tableMap[i].col}`
+      );
+      cell.classList.add("bloquehielo");
       }
-  }
-}
-  // console.log(this.tableMap[3][3].row);
+  };
+
   //Key-map
   this.mapKeys = function () {
     document.addEventListener("keydown", function (e) {
@@ -60,28 +96,36 @@ function IcePinguin() {
           game.penguin.moveUp();
           game.penguin.hero.style.backgroundImage =
             "url(/source/graphics/penguiup.png)";
-        } else {game.penguin.heroStop()}
+        } else {
+          game.penguin.heroStop();
+        }
         break;
       case "right":
         if (this.penguin.posX + this.penguin.speed < 920) {
           game.penguin.moveRight();
           game.penguin.hero.style.backgroundImage =
             "url(/source/graphics/penguiright.png)";
-        } else {game.penguin.heroStop()}
+        } else {
+          game.penguin.heroStop();
+        }
         break;
       case "down":
         if (this.penguin.posY + this.penguin.speed < 720) {
           game.penguin.moveDown();
           game.penguin.hero.style.backgroundImage =
             "url(/source/graphics/penguidown.png)";
-        } else {game.penguin.heroStop()}
+        } else {
+          game.penguin.heroStop();
+        }
         break;
       case "left":
         if (this.penguin.posX - this.penguin.speed > 60) {
           game.penguin.moveLeft();
           game.penguin.hero.style.backgroundImage =
             "url(/source/graphics/penguileft.png)";
-        } else {game.penguin.heroStop()}
+        } else {
+          game.penguin.heroStop();
+        }
         break;
       case "none":
         game.penguin.hero.style.backgroundImage =
