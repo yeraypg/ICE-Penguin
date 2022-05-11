@@ -12,17 +12,18 @@
 }
 #border-map {
   position: absolute;
-  background-image: url(/source/graphics/mapBorder.png);
+  background-image: url(/source/graphics/mapbackground.png);
+  background-size: 1020px 780px;
   margin: 0 auto;
   width: 1020px;
-  height: 820px;
+  height: 780px;
 }
 
 #map {
-  margin: 60px auto;
+  margin: 55px auto;
   height: 700px;
   width: 900px;
-  background-image: url(/source/graphics/mapfloor.png);
+  
 }
 
 #barra-inferior {
@@ -33,15 +34,29 @@
 #hero {
   position: absolute;
   background-image: url(/source/graphics/penguistop.png);
-  width: 50px;
-  height: 50px;
+  background-size: 45px 45px;
+  width: 45px;
+  height: 45px;
 }
 
 table{
-  height:700px;
+  height:660px;
   width: 900px;
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0px;
 }
 
 .bloquehielo{
-  background-color: black;
+  background-image: url(/source/graphics/mapBorder.png);
+}
+
+td{
+  height: 60px;
+  width: 60px;
+}
+
+tr{
+  height: 60px;
+  width: 60px;
 }

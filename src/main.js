@@ -110,7 +110,7 @@ function IcePinguin() {
         }
         break;
       case "down":
-        if (this.penguin.posY + this.penguin.speed < 720) {
+        if (this.penguin.posY + this.penguin.speed < 684) {
           game.penguin.moveDown();
           game.penguin.hero.style.backgroundImage =
             "url(/source/graphics/penguidown.png)";
