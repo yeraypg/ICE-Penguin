@@ -106,7 +106,6 @@ function IcePinguin() {
   //Detect Ice Block Collision
   this.iceBlockCollision = function() {
     //console.log(self.penguin.posY + " " + self.penguin.posX)
-    
     for (i = 0; i < this.tableMap.length ; i++){
       switch (this.penguin.direction){
         case "down":
@@ -117,11 +116,8 @@ function IcePinguin() {
         case "left":
           break;
         case "right":
-          break;
-        
-        }
-      
-      
+          break;        
+      }
     }
   }
  
