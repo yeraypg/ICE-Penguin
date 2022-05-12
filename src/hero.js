@@ -28,7 +28,7 @@ function Hero() {
     
   };
 
-  this.heroStop = function () {
+  this.stop = function () {
     this.direction = "none";
     this.moveNone();
   }
@@ -39,7 +39,7 @@ function Hero() {
     this.hero.style.left = this.posX + "px";
   };
 
-  this.herostyle = function() {
+  this.style = function() {
     switch (this.direction) {
       case "up": game.penguin.hero.style.backgroundImage =
       "url(/source/graphics/penguiup.png)";

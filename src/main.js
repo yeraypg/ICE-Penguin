@@ -3,6 +3,7 @@ function IcePinguin() {
   self = this;
   this.timerId;
   this.penguin = new Hero();
+  this.yeti = new Enemy();
   this.tableMap = [
     { row: 2, col: 2 },
     { row: 2, col: 4 },
@@ -64,22 +65,27 @@ function IcePinguin() {
     });
   };
 
-  this.asignMovement = function () {
-    switch (this.penguin.direction){
-      case "up": game.penguin.moveUp(); break;
-      case "down": game.penguin.moveDown(); break;
-      case "left": game.penguin.moveLeft(); break;
-      case "right": game.penguin.moveRight(); break;
-      case "none": game.penguin.moveNone(); break;
+  this.asignMovement = function (char) {
+    switch (this[char].direction){
+      case "up": game[char].moveUp(); break;
+      case "down": game[char].moveDown(); break;
+      case "left": game[char].moveLeft(); break;
+      case "right": game[char].moveRight(); break;
+      case "none": game[char].moveNone(); break;
     }
 
   }
   this.moveControl = function () {
    
-    self.borderCollision();
-    self.iceBlockCollision();
-    self.asignMovement();
+    self.borderCollision("penguin");
+    self.borderCollision("yeti");
+    self.iceBlockCollision("penguin");
+    self.iceBlockCollision("yeti");
+    self.asignMovement("penguin");
+    self.asignMovement("yeti");
+    self.yeti.paintEnemy();
     self.penguin.paintHero();
+  
     
   };
 
@@ -96,54 +102,50 @@ function IcePinguin() {
   }
   
   //Detect Ice Block Collision
-  this.iceBlockCollision = function() {
-    //console.log(self.penguin.posY + " " + self.penguin.posX)
+  this.iceBlockCollision = function(char) {
     for (i = 0; i < self.tableMap.length ; i++){
-      switch (self.penguin.direction){
+      switch (self[char].direction){
         case "down":
-          if (self.penguin.posY <= (self.tableMap[i].row*60) && self.penguin.posY >= ((self.tableMap[i].row-1)*60) && self.penguin.posX >= (((self.tableMap[i].col-1)*60)) && (self.penguin.posX + self.penguin.height) <= (((self.tableMap[i].col)*60))){self.penguin.direction="none"};
+          if (self[char].posY <= (self.tableMap[i].row*60) && self[char].posY >= ((self.tableMap[i].row-1)*60) && self[char].posX >= (((self.tableMap[i].col-1)*60)) && (self[char].posX + self[char].height) <= (((self.tableMap[i].col)*60))){self[char].direction="none"};
           break;
         case "up":
-          if (self.penguin.posY <= ((self.tableMap[i].row+2)*60) && self.penguin.posY >= ((self.tableMap[i].row+1)*60) && self.penguin.posX >= ((self.tableMap[i].col*60)) && self.penguin.posX <= (((self.tableMap[i].col+1)*60))){self.penguin.direction="none"};
+          if (self[char].posY <= ((self.tableMap[i].row+2)*60) && self[char].posY >= ((self.tableMap[i].row+1)*60) && self[char].posX >= ((self.tableMap[i].col*60)) && self[char].posX <= (((self.tableMap[i].col+1)*60))){self[char].direction="none"};
           break;
         case "left":
-          if (self.penguin.posX <= (self.tableMap[i].col*60) && self.penguin.posX >= ((self.tableMap[i].col-1)*60) && self.penguin.posY >= (((self.tableMap[i].row*60)-30)) && self.penguin.posY <= (((self.tableMap[i].row+1)*60)-11)){self.penguin.direction="none"};
+          if (self[char].posX <= (self.tableMap[i].col*60) && self[char].posX >= ((self.tableMap[i].col-1)*60) && self[char].posY >= (((self.tableMap[i].row*60)-30)) && self[char].posY <= (((self.tableMap[i].row+1)*60)-11)){self[char].direction="none"};
           break;
         case "right":
-          if (self.penguin.posX <= (self.tableMap[i].col*60) && self.penguin.posX >= ((self.tableMap[i].col-1)*60) && self.penguin.posY >= (((self.tableMap[i].row*60)-30)) && self.penguin.posY <= (((self.tableMap[i].row+1)*60)-11)){self.penguin.direction="none"};
+          if (self[char].posX <= (self.tableMap[i].col*60) && self[char].posX >= ((self.tableMap[i].col-1)*60) && self[char].posY >= (((self.tableMap[i].row*60)-30)) && self[char].posY <= (((self.tableMap[i].row+1)*60)-11)){self[char].direction="none"};
           break;        
       }
     }
   }
  
-  // Detect Border Collision
-  this.borderCollision = function () {
-    switch (this.penguin.direction) {
+  // Detect Border Collision 
+  this.borderCollision = function (char) {
+    switch (this[char].direction) {
       case "up":
-        if (this.penguin.posY - this.penguin.speed > 55) {game.penguin.herostyle();}
-        else {game.penguin.heroStop();}
+        if (this[char].posY - this[char].speed > 55) {game[char].style();}
+        else {game[char].stop();}
         break;
       case "right":
-        if (this.penguin.posX + this.penguin.speed < 920) {game.penguin.herostyle();}
-        else {game.penguin.heroStop();}
+        if (this[char].posX + this[char].speed < 920) {game[char].style();}
+        else {game[char].stop();}
         break;
       case "down":
-        if (this.penguin.posY + this.penguin.speed < 684) {game.penguin.herostyle();}
-        else {game.penguin.heroStop();}
+        if (this[char].posY + this[char].speed < 684) {game[char].style();}
+        else {game[char].stop();}
         break;
       case "left":
-        if (this.penguin.posX - this.penguin.speed > 60) {game.penguin.herostyle();}
-        else {game.penguin.heroStop();}
+        if (this[char].posX - this[char].speed > 60) {game[char].style();}
+        else {game[char].stop();}
         break;
       case "none":
-        game.penguin.herostyle();
+        game[char].style();
         break;
     }
   };
 }
-
-//Constructor Char
-function Char() {}
 
 //Game
 let game = new IcePinguin();

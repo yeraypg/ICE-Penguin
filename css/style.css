@@ -50,13 +50,24 @@
 #hero {
   position: absolute;
   background-image: url(/source/graphics/penguistop.png);
-  background-size: 45px 45px;
+  background-size: 35px 35px;
   width: 35px;
   height: 35px;
   background-repeat:no-repeat;
   background-position: center;
   border: 1px solid black;
   
+}
+#enemy {
+  position: absolute;
+  background-color: black;
+  background-size: 35px 35px;
+  width: 35px;
+  height: 35px;
+  background-repeat:no-repeat;
+  background-position: center;
+  border: 1px solid black;
+
 }
 
 table {
