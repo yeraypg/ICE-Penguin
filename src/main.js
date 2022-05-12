@@ -87,7 +87,7 @@ function IcePinguin() {
   this.startGame = function () {
     self.mapKeys();
     self.generateIceMap();
-    this.timerId = setInterval(this.moveControl, 50);
+    this.timerId = setInterval(this.moveControl, 10);
   };
   
   //Calculate Array Ice Block Collision
@@ -101,10 +101,10 @@ function IcePinguin() {
     for (i = 0; i < self.tableMap.length ; i++){
       switch (self.penguin.direction){
         case "down":
-          if (self.penguin.posY <= (self.tableMap[i].row*60) && self.penguin.posY >= ((self.tableMap[i].row-1)*60) && self.penguin.posX >= ((self.tableMap[i].col*60)-25) && self.penguin.posX <= (((self.tableMap[i].col+1)*60)-25)){self.penguin.direction="none"};
+          if (self.penguin.posY <= (self.tableMap[i].row*60) && self.penguin.posY >= ((self.tableMap[i].row-1)*60) && self.penguin.posX >= (((self.tableMap[i].col-1)*60)) && (self.penguin.posX + self.penguin.height) <= (((self.tableMap[i].col)*60))){self.penguin.direction="none"};
           break;
         case "up":
-          if (self.penguin.posY <= ((self.tableMap[i].row+2)*60) && self.penguin.posY >= ((self.tableMap[i].row+1)*60) && self.penguin.posX >= ((self.tableMap[i].col*60)-25) && self.penguin.posX <= (((self.tableMap[i].col+1)*60)-25)){self.penguin.direction="none"};
+          if (self.penguin.posY <= ((self.tableMap[i].row+2)*60) && self.penguin.posY >= ((self.tableMap[i].row+1)*60) && self.penguin.posX >= ((self.tableMap[i].col*60)) && self.penguin.posX <= (((self.tableMap[i].col+1)*60))){self.penguin.direction="none"};
           break;
         case "left":
           if (self.penguin.posX <= (self.tableMap[i].col*60) && self.penguin.posX >= ((self.tableMap[i].col-1)*60) && self.penguin.posY >= (((self.tableMap[i].row*60)-30)) && self.penguin.posY <= (((self.tableMap[i].row+1)*60)-11)){self.penguin.direction="none"};

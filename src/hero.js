@@ -2,7 +2,7 @@
 function Hero() {
   this.hero = document.getElementById("hero");
   this.direction = "none";
-  this.speed = 10;
+  this.speed = 3;
   this.posX = 60;
   this.posY = 60;
 
