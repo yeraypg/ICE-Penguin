@@ -51,8 +51,11 @@
   position: absolute;
   background-image: url(/source/graphics/penguistop.png);
   background-size: 45px 45px;
-  width: 45px;
-  height: 45px;
+  width: 58px;
+  height: 58px;
+  background-repeat:no-repeat;
+  background-position: center;
+  
 }
 
 table {

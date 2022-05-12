@@ -106,16 +106,19 @@ function IcePinguin() {
   //Detect Ice Block Collision
   this.iceBlockCollision = function() {
     //console.log(self.penguin.posY + " " + self.penguin.posX)
-    for (i = 0; i < this.tableMap.length ; i++){
-      switch (this.penguin.direction){
+    for (i = 0; i < self.tableMap.length ; i++){
+      switch (self.penguin.direction){
         case "down":
-          if (self.penguin.posY < (this.tableMap[i].row*60) && self.penguin.posY > ((this.tableMap[i].row-1)*60) && self.penguin.posX > (this.tableMap[i].col*60) && self.penguin.posX < (this.tableMap[i+1]*60)){console.log("collision")};
+          if (self.penguin.posY <= (self.tableMap[i].row*60) && self.penguin.posY >= ((self.tableMap[i].row-1)*60) && self.penguin.posX >= ((self.tableMap[i].col*60)-25) && self.penguin.posX <= (((self.tableMap[i].col+1)*60)-25)){self.penguin.direction="none"};
           break;
         case "up":
+          if (self.penguin.posY <= ((self.tableMap[i].row+2)*60) && self.penguin.posY >= ((self.tableMap[i].row+1)*60) && self.penguin.posX >= ((self.tableMap[i].col*60)-25) && self.penguin.posX <= (((self.tableMap[i].col+1)*60)-25)){self.penguin.direction="none"};
           break;
         case "left":
+          if (self.penguin.posX <= (self.tableMap[i].col*60) && self.penguin.posX >= ((self.tableMap[i].col-1)*60) && self.penguin.posY >= (((self.tableMap[i].row*60)-30)) && self.penguin.posY <= (((self.tableMap[i].row+1)*60)-11)){self.penguin.direction="none"};
           break;
         case "right":
+          if (self.penguin.posX <= (self.tableMap[i].col*60) && self.penguin.posX >= ((self.tableMap[i].col-1)*60) && self.penguin.posY >= (((self.tableMap[i].row*60)-30)) && self.penguin.posY <= (((self.tableMap[i].row+1)*60)-11)){self.penguin.direction="none"};
           break;        
       }
     }
