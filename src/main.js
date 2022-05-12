@@ -105,17 +105,17 @@ function IcePinguin() {
   this.iceBlockCollision = function(char) {
     for (i = 0; i < self.tableMap.length ; i++){
       switch (self[char].direction){
-        case "down":
-          if (self[char].posY <= (self.tableMap[i].row*60) && self[char].posY >= ((self.tableMap[i].row-1)*60) && self[char].posX >= (((self.tableMap[i].col-1)*60)) && (self[char].posX + self[char].height) <= (((self.tableMap[i].col)*60))){self[char].direction="none"};
+        case "right":
+          if (self[char].posY <= ((self.tableMap[i].row+1)*60) && self[char].posY >= (((self.tableMap[i].row)*60) - self[char].height) && self[char].posX >= ((self.tableMap[i].col-1)*60) && (self[char].posX) <= ((self.tableMap[i].col)*60)){self[char].direction="none"};
           break;
-        case "up":
-          if (self[char].posY <= ((self.tableMap[i].row+2)*60) && self[char].posY >= ((self.tableMap[i].row+1)*60) && self[char].posX >= ((self.tableMap[i].col*60)) && self[char].posX <= (((self.tableMap[i].col+1)*60))){self[char].direction="none"};
+        case "down":
+          if (self[char].posY <= ((self.tableMap[i].row)*60) && self[char].posY >= ((self.tableMap[i].row-1)*60) && self[char].posX >= ((self.tableMap[i].col*60) - self[char].height) && self[char].posX <= ((self.tableMap[i].col+1)*60)){self[char].direction="none"};
           break;
         case "left":
-          if (self[char].posX <= (self.tableMap[i].col*60) && self[char].posX >= ((self.tableMap[i].col-1)*60) && self[char].posY >= (((self.tableMap[i].row*60)-30)) && self[char].posY <= (((self.tableMap[i].row+1)*60)-11)){self[char].direction="none"};
+          if (self[char].posY <= ((self.tableMap[i].row+1)*60) && self[char].posY >= (((self.tableMap[i].row)*60) - self[char].height) && self[char].posX >= ((self.tableMap[i].col+1)*60) && (self[char].posX) <= ((self.tableMap[i].col+2)*60)){self[char].direction="none"};
           break;
-        case "right":
-          if (self[char].posX <= (self.tableMap[i].col*60) && self[char].posX >= ((self.tableMap[i].col-1)*60) && self[char].posY >= (((self.tableMap[i].row*60)-30)) && self[char].posY <= (((self.tableMap[i].row+1)*60)-11)){self[char].direction="none"};
+        case "up":
+          if (self[char].posY <= ((self.tableMap[i].row+2)*60) && self[char].posY >= ((self.tableMap[i].row+1)*60) && self[char].posX >= ((self.tableMap[i].col*60) - self[char].height) && self[char].posX <= ((self.tableMap[i].col+1)*60)){self[char].direction="none"};
           break;        
       }
     }
