@@ -78,12 +78,14 @@ function IcePinguin() {
       case "down": game.penguin.moveDown(); break;
       case "left": game.penguin.moveLeft(); break;
       case "right": game.penguin.moveRight(); break;
+      case "none": game.penguin.moveNone(); break;
     }
 
   }
   this.moveControl = function () {
    
     self.borderCollision();
+    self.iceBlockCollision();
     self.asignMovement();
     self.penguin.paintHero();
     
@@ -96,6 +98,32 @@ function IcePinguin() {
     this.timerId = setInterval(this.moveControl, 50);
   };
   
+  //Calculate Array Ice Block Collision
+  this.calculateArrayBlockCollision = function() {
+    
+  }
+  
+  //Detect Ice Block Collision
+  this.iceBlockCollision = function() {
+    //console.log(self.penguin.posY + " " + self.penguin.posX)
+    
+    for (i = 0; i < this.tableMap.length ; i++){
+      switch (this.penguin.direction){
+        case "down":
+          if (self.penguin.posY < (this.tableMap[i].row*60) && self.penguin.posY > ((this.tableMap[i].row-1)*60) && self.penguin.posX > (this.tableMap[i].col*60) && self.penguin.posX < (this.tableMap[i+1]*60)){console.log("collision")};
+          break;
+        case "up":
+          break;
+        case "left":
+          break;
+        case "right":
+          break;
+        
+        }
+      
+      
+    }
+  }
  
   // Detect Border Collision
   this.borderCollision = function () {

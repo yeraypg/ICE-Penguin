@@ -3,8 +3,8 @@ function Hero() {
   this.hero = document.getElementById("hero");
   this.direction = "none";
   this.speed = 10;
-  this.posX = 63;
-  this.posY = 63;
+  this.posX = 60;
+  this.posY = 60;
 
   //Move Control - Asigna el nuevo valor de la posición de Hero
 
