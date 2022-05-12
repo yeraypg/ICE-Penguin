@@ -6,7 +6,7 @@
   margin-top: 125px;
 }
 
-#barra-superior {
+#top-panel {
   height: 100px;
   width: 1020px;
   border: none;
@@ -34,7 +34,7 @@
 
 }
 
-#barra-inferior {
+#bottom-panel {
   position: absolute;
   top: 1000px;
   width: auto;
@@ -66,7 +66,7 @@ table {
   border-spacing: 0px;
 }
 
-.bloquehielo {
+.ice-cube {
   background-image: url(/source/graphics/iceblock.png);
 }
 

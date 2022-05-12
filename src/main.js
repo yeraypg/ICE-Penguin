@@ -45,7 +45,7 @@ function IcePinguin() {
   this.generateIceMap = function () {
     for (var i = 0; i < this.tableMap.length; i++) {
       var cell = document.querySelector(`tr#row${this.tableMap[i].row} > td#col${this.tableMap[i].col}`);      
-      cell.classList.add("bloquehielo");
+      cell.classList.add("ice-cube");
       }
   };
 
@@ -53,18 +53,10 @@ function IcePinguin() {
   this.mapKeys = function () {
     document.addEventListener("keydown", function (e) {
       switch (e.key) {
-        case "ArrowUp":
-          self.penguin.direction = "up";
-          break;
-        case "ArrowRight":
-          self.penguin.direction = "right";
-          break;
-        case "ArrowDown":
-          self.penguin.direction = "down";
-          break;
-        case "ArrowLeft":
-          self.penguin.direction = "left";
-          break;
+        case "ArrowUp": self.penguin.direction = "up"; break;
+        case "ArrowRight": self.penguin.direction = "right"; break;
+        case "ArrowDown": self.penguin.direction = "down"; break;
+        case "ArrowLeft": self.penguin.direction = "left"; break;
       }
     });
     document.addEventListener("keyup", function (e) {
@@ -128,32 +120,20 @@ function IcePinguin() {
   this.borderCollision = function () {
     switch (this.penguin.direction) {
       case "up":
-        if (this.penguin.posY - this.penguin.speed > 55) {
-          game.penguin.herostyle();
-        } else {
-          game.penguin.heroStop();
-        }
+        if (this.penguin.posY - this.penguin.speed > 55) {game.penguin.herostyle();}
+        else {game.penguin.heroStop();}
         break;
       case "right":
-        if (this.penguin.posX + this.penguin.speed < 920) {
-          game.penguin.herostyle();
-        } else {
-          game.penguin.heroStop();
-        }
+        if (this.penguin.posX + this.penguin.speed < 920) {game.penguin.herostyle();}
+        else {game.penguin.heroStop();}
         break;
       case "down":
-        if (this.penguin.posY + this.penguin.speed < 684) {
-          game.penguin.herostyle();
-        } else {
-          game.penguin.heroStop();
-        }
+        if (this.penguin.posY + this.penguin.speed < 684) {game.penguin.herostyle();}
+        else {game.penguin.heroStop();}
         break;
       case "left":
-        if (this.penguin.posX - this.penguin.speed > 60) {
-          game.penguin.herostyle();
-        } else {
-          game.penguin.heroStop();
-        }
+        if (this.penguin.posX - this.penguin.speed > 60) {game.penguin.herostyle();}
+        else {game.penguin.heroStop();}
         break;
       case "none":
         game.penguin.herostyle();
