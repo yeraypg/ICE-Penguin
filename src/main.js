@@ -40,15 +40,11 @@ function IcePinguin() {
     { row: 10, col: 12 },
     { row: 10, col: 14 },
   ];
+
   //Generate Fixed Ice Blocks 
   this.generateIceMap = function () {
     for (var i = 0; i < this.tableMap.length; i++) {
-      var cell = document.querySelector(
-        `tr#row${this.tableMap[i].row} > td#col${this.tableMap[i].col}`
-      );
-      console.log(
-        `tr#row${this.tableMap[i].row} > td#col${this.tableMap[i].col}`
-      );
+      var cell = document.querySelector(`tr#row${this.tableMap[i].row} > td#col${this.tableMap[i].col}`);      
       cell.classList.add("bloquehielo");
       }
   };
@@ -76,60 +72,64 @@ function IcePinguin() {
     });
   };
 
+  this.asignMovement = function () {
+    switch (this.penguin.direction){
+      case "up": game.penguin.moveUp(); break;
+      case "down": game.penguin.moveDown(); break;
+      case "left": game.penguin.moveLeft(); break;
+      case "right": game.penguin.moveRight(); break;
+    }
+
+  }
   this.moveControl = function () {
+   
     self.borderCollision();
-    game.penguin.paintHero();
-    self.generateIceMap();
+    self.asignMovement();
+    self.penguin.paintHero();
+    
   };
 
   //StartGame
   this.startGame = function () {
     self.mapKeys();
+    self.generateIceMap();
     this.timerId = setInterval(this.moveControl, 50);
   };
-
-  // Detectar colisión con los bordes
+  
+ 
+  // Detect Border Collision
   this.borderCollision = function () {
     switch (this.penguin.direction) {
       case "up":
         if (this.penguin.posY - this.penguin.speed > 55) {
-          game.penguin.moveUp();
-          game.penguin.hero.style.backgroundImage =
-            "url(/source/graphics/penguiup.png)";
+          game.penguin.herostyle();
         } else {
           game.penguin.heroStop();
         }
         break;
       case "right":
         if (this.penguin.posX + this.penguin.speed < 920) {
-          game.penguin.moveRight();
-          game.penguin.hero.style.backgroundImage =
-            "url(/source/graphics/penguiright.png)";
+          game.penguin.herostyle();
         } else {
           game.penguin.heroStop();
         }
         break;
       case "down":
         if (this.penguin.posY + this.penguin.speed < 684) {
-          game.penguin.moveDown();
-          game.penguin.hero.style.backgroundImage =
-            "url(/source/graphics/penguidown.png)";
+          game.penguin.herostyle();
         } else {
           game.penguin.heroStop();
         }
         break;
       case "left":
         if (this.penguin.posX - this.penguin.speed > 60) {
-          game.penguin.moveLeft();
-          game.penguin.hero.style.backgroundImage =
-            "url(/source/graphics/penguileft.png)";
+          game.penguin.herostyle();
         } else {
           game.penguin.heroStop();
         }
         break;
       case "none":
-        game.penguin.hero.style.backgroundImage =
-          "url(/source/graphics/penguistop.png)";
+        game.penguin.herostyle();
         break;
     }
   };

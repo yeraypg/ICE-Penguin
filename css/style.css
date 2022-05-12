@@ -1,17 +1,25 @@
 #container {
   width: 1020px;
   height: 1020px;
-  border: 1px solid black;
+  border: none;
   margin: 0 auto;
   margin-top: 125px;
 }
 
 #barra-superior {
   height: 100px;
-  border: 1px solid red;
+  width: 1020px;
+  border: none;
+  border-top: 5px solid black;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+  background-image: url(/source/graphics/mapfloor.png);
 }
+
 #border-map {
   position: absolute;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
   background-image: url(/source/graphics/mapbackground.png);
   background-size: 1020px 780px;
   margin: 0 auto;
@@ -23,12 +31,20 @@
   margin: 55px auto;
   height: 700px;
   width: 900px;
-  
+
 }
 
 #barra-inferior {
-  height: 95px;
-  border: 1px solid green;
+  position: absolute;
+  top: 1000px;
+  width: auto;
+  height: 100px;
+  width: inherit;
+  border: none;
+  border-bottom: 5px solid black;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+  background-image: url(/source/graphics/mapfloor.png);
 }
 
 #hero {
@@ -39,24 +55,24 @@
   height: 45px;
 }
 
-table{
-  height:660px;
+table {
+  height: 660px;
   width: 900px;
   border: none;
   border-collapse: collapse;
   border-spacing: 0px;
 }
 
-.bloquehielo{
-  background-image: url(/source/graphics/mapBorder.png);
+.bloquehielo {
+  background-image: url(/source/graphics/iceblock.png);
 }
 
-td{
+td {
   height: 60px;
   width: 60px;
 }
 
-tr{
+tr {
   height: 60px;
   width: 60px;
 }

@@ -28,15 +28,37 @@ function Hero() {
     
   };
 
+  this.heroStop = function () {
+    this.direction = "none";
+    this.moveNone();
+  }
+
   //Actualizar posición de Hero en DOM
   this.paintHero = function () {
     this.hero.style.top = this.posY + "px";
     this.hero.style.left = this.posX + "px";
   };
 
-  this.heroStop = function () {
-    this.direction = "none";
-    this.moveNone();
+  this.herostyle = function() {
+    switch (this.direction) {
+      case "up": game.penguin.hero.style.backgroundImage =
+      "url(/source/graphics/penguiup.png)";
+      break;
+      case "right": game.penguin.hero.style.backgroundImage =
+      "url(/source/graphics/penguiright.png)";
+      break;
+      case "down": game.penguin.hero.style.backgroundImage =
+      "url(/source/graphics/penguidown.png)";
+      break;
+      case "left": game.penguin.hero.style.backgroundImage =
+      "url(/source/graphics/penguileft.png)";
+      break;
+      case "none": game.penguin.hero.style.backgroundImage =
+      "url(/source/graphics/penguistop.png)";
+      break;
+      
+    }
+
   }
 }
 
