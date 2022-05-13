@@ -4,7 +4,8 @@ function IcePinguin() {
   this.timerId;
   this.penguin = new Hero();
   this.yeti = new Enemy();
-  this.iceblock = 60;
+  this.iceBlockHeight = 62;
+  this.iceBlockWidth = 60;
   this.tableMap = [
     { row: 2, col: 2 },
     { row: 2, col: 4 },
@@ -94,7 +95,7 @@ function IcePinguin() {
   this.startGame = function () {
     self.mapKeys();
     self.generateIceMap();
-    this.timerId = setInterval(this.moveControl, 5);
+    this.timerId = setInterval(this.moveControl, 0.1);
   };
   
   //Calculate Array Ice Block Collision
@@ -107,16 +108,17 @@ function IcePinguin() {
     for (i = 0; i < self.tableMap.length ; i++){
       switch (self[char].direction){
         case "right":
-          if (((self[char].posX + self[char].height + self[char].speed) > ((self.tableMap[i].col) * this.iceblock)) && ((self[char].posY) < (self.tableMap[i].row + 1) * this.iceblock) && ((self[char].posY + self[char].height) > (self.tableMap[i].row * this.iceblock))){self[char].direction="none"};
+          console.log(this.iceBlockHeight + "" + this.iceBlockWidth)
+          if (((self[char].posX + self[char].height + self[char].speed) > ((self.tableMap[i].col) * this.iceBlockWidth)) && ((self[char].posY) < (self.tableMap[i].row + 1) * this.iceBlockHeight) && ((self[char].posY + self[char].height) > (self.tableMap[i].row * this.iceBlockHeight))){self[char].direction="none"};
           break;
         case "down":
-          if (((self[char].posY + self[char].height + self[char].speed) > ((self.tableMap[i].row) * this.iceblock)) && ((self[char].posX) < (self.tableMap[i].col + 1) * this.iceblock) && ((self[char].posX + self[char].height) > (self.tableMap[i].col * this.iceblock))){self[char].direction="none"};
+          if (((self[char].posY + self[char].height + self[char].speed) > ((self.tableMap[i].row) * this.iceBlockHeight)) && ((self[char].posX) < (self.tableMap[i].col + 1) * this.iceBlockWidth) && ((self[char].posX + self[char].height) > (self.tableMap[i].col * this.iceBlockWidth))){self[char].direction="none"};
           break;
         case "left":
-          if (((self[char].posX + self[char].height + self[char].speed) < ((self.tableMap[i].col + 1) * this.iceblock)) && ((self[char].posY) < (self.tableMap[i].row + 1) * this.iceblock) && ((self[char].posY + self[char].height) > (self.tableMap[i].row * this.iceblock))){self[char].direction="none"};
+          if (((self[char].posX + self[char].height + self[char].speed) < ((self.tableMap[i].col + 1) * this.iceBlockWidth)) && ((self[char].posY) < (self.tableMap[i].row + 1) * this.iceBlockHeight) && ((self[char].posY + self[char].height) > (self.tableMap[i].row * this.iceBlockHeight))){self[char].direction="none"};
           break;
         case "up":
-          if (((self[char].posY + self[char].speed) > ((self.tableMap[i].row + 1) * this.iceblock)) && ((self[char].posX) < (self.tableMap[i].col + 1) * this.iceblock) && ((self[char].posX + self[char].height) > (self.tableMap[i].col * this.iceblock))){self[char].direction="none"};
+          if (((self[char].posY + self[char].speed) > ((self.tableMap[i].row + 1) * this.iceBlockHeight)) && ((self[char].posX) < (self.tableMap[i].col + 1) * this.iceBlockWidth) && ((self[char].posX + self[char].height) > (self.tableMap[i].col * this.iceBlockWidth))){self[char].direction="none"};
           break;        
       }
     }
@@ -134,7 +136,7 @@ function IcePinguin() {
         else {game[char].stop();}
         break;
       case "down":
-        if (this[char].posY + this[char].speed < 684) {game[char].style();}
+        if (this[char].posY + self[char].height + this[char].speed < 730) {game[char].style();}
         else {game[char].stop();}
         break;
       case "left":

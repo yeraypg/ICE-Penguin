@@ -1,3 +1,10 @@
+.body-ini{}
+
+.body-gameover{}
+
+.body-win{}
+
+
 #container {
   width: 1020px;
   height: 1020px;
@@ -55,7 +62,7 @@
   height: 35px;
   background-repeat:no-repeat;
   background-position: center;
-  border: 1px solid black;
+  
   
 }
 #enemy {
@@ -66,7 +73,7 @@
   height: 35px;
   background-repeat:no-repeat;
   background-position: center;
-  border: 1px solid black;
+  
 
 }
 
@@ -83,15 +90,17 @@ table {
   background-position: center;
   height: 60px;
   width: 60px;
-  border: 1px solid black;
+  
 }
 
 td {
   height: 60px;
   width: 60px;
+  border: none;
 }
 
 tr {
+  border: none;
   height: 60px;
   width: 60px;
 }

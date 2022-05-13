@@ -1,10 +1,10 @@
 //Constructor Enemy
 function Enemy() {
     this.enemy = document.getElementById("enemy");
-    this.direction = "none";
+    this.direction = "down";
     this.speed = 1;
     this.height = 50;
-    this.posX = 900;
+    this.posX = 850;
     this.posY = 60;
     
 //Move Control - Asigna el nuevo valor de la posición del Enemy
