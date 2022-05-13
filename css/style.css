@@ -80,6 +80,9 @@ table {
 
 .ice-cube {
   background-image: url(/source/graphics/iceblock.png);
+  background-position: center;
+  height: 60px;
+  width: 60px;
   border: 1px solid black;
 }
 

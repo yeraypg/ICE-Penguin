@@ -2,10 +2,11 @@
 function Hero() {
   this.hero = document.getElementById("hero");
   this.direction = "none";
-  this.speed = 3;
+  this.speed = 1;
+  this.height = 35;
   this.posX = 60;
   this.posY = 60;
-
+  
   //Move Control - Asigna el nuevo valor de la posición de Hero
 
   this.moveUp = function () {
