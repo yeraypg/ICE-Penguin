@@ -1,9 +1,34 @@
-.body-ini{}
+.body-ini {
+}
 
-.body-gameover{}
+.body-gameover {
+}
 
-.body-win{}
+.body-win {
+}
 
+.mrg-bottom-panel {
+  position: initial;
+  margin-top: 15px;
+  margin-left: 45px;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+.btn-exit {
+  position: absolute;
+  margin-top: 15px;
+  left: 790px;
+  background: url(/source/graphics/botoninicio.png) center;
+  border: none;
+  padding: 35px 95px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+.btn-exit:active {
+  background: url(/source/graphics/botoninicio\ pulsado.png) center;
+}
 
 #container {
   width: 1020px;
@@ -38,7 +63,6 @@
   margin: 55px auto;
   height: 700px;
   width: 900px;
-
 }
 
 #bottom-panel {
@@ -60,21 +84,17 @@
   background-size: 35px 35px;
   width: 35px;
   height: 35px;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   background-position: center;
-  
-  
 }
 #enemy {
   position: absolute;
-  background-color: black;
-  background-size: 35px 35px;
-  width: 35px;
-  height: 35px;
-  background-repeat:no-repeat;
+  background-image: url(/source/graphics/yetileft.png);
+  background-size: 60px 60px;
+  width: 60px;
+  height: 60px;
+  background-repeat: no-repeat;
   background-position: center;
-  
-
 }
 
 table {
@@ -90,7 +110,6 @@ table {
   background-position: center;
   height: 60px;
   width: 60px;
-  
 }
 
 td {

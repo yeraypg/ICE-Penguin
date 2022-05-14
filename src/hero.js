@@ -4,8 +4,8 @@ function Hero() {
   this.direction = "none";
   this.speed = 3;
   this.height = 35;
-  this.posX = 60;
-  this.posY = 60;
+  this.posX = 75;
+  this.posY = 75;
   
   //Move Control - Asigna el nuevo valor de la posición de Hero
 
@@ -57,7 +57,9 @@ function Hero() {
       case "none": game.penguin.hero.style.backgroundImage =
       "url(/source/graphics/penguistop.png)";
       break;
-      
+      case "dead": game.penguin.hero.style.backgroundImage =
+      "url(/source/graphics/penguidead.png)";
+      break;      
     }
 
   }
