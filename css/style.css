@@ -1,10 +1,7 @@
 html {
   overflow: hidden;
   scrollbar-width: none;
-}
-
-span {
-  font-family: ;
+  background-image: url();
 }
 
 #main {
@@ -21,7 +18,7 @@ span {
 #btn-main {
   position: relative;
   margin-top: 300px;
-  margin-left: 1010px;
+  margin-left: 980px;
   background: url(/source/graphics/botonstart.png) center;
   border: none;
   padding: 65px 160px;

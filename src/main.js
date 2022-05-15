@@ -1,11 +1,10 @@
-btnMain = document.getElementById("btn-main");
+var btnMain = document.getElementById("btn-main");
 
 //Constructor New Game
 function IcePinguin() {
   self = this;
   this.main = document.getElementById("main");
   this.container = document.getElementById("container");
-
   this.btnExit = document.getElementById("btn-exit");
   this.gameStatus;
   this.timerId;
@@ -175,8 +174,9 @@ function IcePinguin() {
     self.yeti.direction = "win";
     game.penguin.style();
     game.yeti.style();    
-    this.container.style.display = "none";
-    this.main.style.display = "block";
+    //this.container.style.display = "none";
+    //this.main.style.backgroundImage = "url(/source/graphics/fondogameover.png)";
+    //this.main.style.display = "block";
 
     }
 
