@@ -1,10 +1,37 @@
-.body-ini {
+html {
+  overflow: hidden;
+  scrollbar-width: none;
 }
 
-.body-gameover {
+span {
+  font-family: ;
 }
 
-.body-win {
+#main {
+  position: absolute;
+  height: 1020px;
+  width: 100%;
+  background-image: url(/source/graphics/fondoinicio.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+    
+}
+
+#btn-main {
+  position: relative;
+  margin-top: 300px;
+  margin-left: 1010px;
+  background: url(/source/graphics/botonstart.png) center;
+  border: none;
+  padding: 65px 160px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+#btn-main:active {
+  background: url(/source/graphics/botonstartpulsado.png) center;
 }
 
 .mrg-bottom-panel {
@@ -14,11 +41,11 @@
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
 }
 
-.btn-exit {
+#btn-exit {
   position: absolute;
   margin-top: 15px;
   left: 790px;
-  background: url(/source/graphics/botoninicio.png) center;
+  background: url(/source/graphics/botonexit.png) center;
   border: none;
   padding: 35px 95px;
   background-repeat: no-repeat;
@@ -26,16 +53,17 @@
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
 }
 
-.btn-exit:active {
-  background: url(/source/graphics/botoninicio\ pulsado.png) center;
+#btn-exit:active {
+  background: url(/source/graphics/botonexitpulsado.png) center;
 }
 
 #container {
+  display: none;
   width: 1020px;
   height: 1020px;
   border: none;
   margin: 0 auto;
-  margin-top: 125px;
+  margin-top: 75px;
 }
 
 #top-panel {
@@ -67,7 +95,7 @@
 
 #bottom-panel {
   position: absolute;
-  top: 1000px;
+  top: 950px;
   width: auto;
   height: 100px;
   width: inherit;
