@@ -166,7 +166,7 @@ function IcePinguin() {
         else { game[char].stop(); }
         break;
       case "down":
-        if (this[char].posY + self[char].height + this[char].speed < 660) { game[char].style(); }
+        if (this[char].posY + self[char].height + this[char].speed < 650) { game[char].style(); }
         else { game[char].stop(); }
         break;
       case "left":

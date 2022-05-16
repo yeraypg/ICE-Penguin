@@ -75,12 +75,12 @@ html {
 
 #border-map {
   position: absolute;
-  height: 789px;
+  height: 770px;
   width: 1020px;
   border-left: 5px solid black;
   border-right: 5px solid black;
   background-image: url(/source/graphics/mapbackground.png);
-  background-size: cover;
+  background-size: 1020px 770px;
   background-repeat: no-repeat;
   margin: 0 auto;
   
@@ -91,7 +91,7 @@ html {
   margin: 70px auto;
   height: 660px;
   width: 900px;
-  border: 1px solid black;
+ 
 }
 
 #bottom-panel {
