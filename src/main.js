@@ -1,8 +1,9 @@
 var btnMain = document.getElementById("btn-main");
-
+musicini = new Audio("source/sounds/iceland.mp3");
 //Constructor New Game
 function IcePinguin() {
   self = this;
+  this.map = document.getElementById("map");
   this.main = document.getElementById("main");
   this.container = document.getElementById("container");
   this.btnExit = document.getElementById("btn-exit");
@@ -13,45 +14,45 @@ function IcePinguin() {
   this.yeti = new Enemy();
   this.iceBlockHeight = 62;
   this.iceBlockWidth = 60;
-  this.musicini = new Audio("source/sounds/iceland.mp3");
+  this.gamemusic = new Audio("source/sounds/musicgame.ogg")
   this.herodead = new Audio("source/sounds/herodead.mp3");
   this.audiobtn = new Audio("source/sounds/clickbutton.wav")
   this.tableMap = [
-    { row: 2, col: 2 },
-    { row: 2, col: 4 },
-    { row: 2, col: 6 },
-    { row: 2, col: 8 },
-    { row: 2, col: 10 },
-    { row: 2, col: 12 },
-    { row: 2, col: 14 },
-    { row: 4, col: 2 },
-    { row: 4, col: 4 },
-    { row: 4, col: 6 },
-    { row: 4, col: 8 },
-    { row: 4, col: 10 },
-    { row: 4, col: 12 },
-    { row: 4, col: 14 },
-    { row: 6, col: 2 },
-    { row: 6, col: 4 },
-    { row: 6, col: 6 },
-    { row: 6, col: 8 },
-    { row: 6, col: 10 },
-    { row: 6, col: 12 },
-    { row: 6, col: 14 },
-    { row: 8, col: 2 },
-    { row: 8, col: 4 },
-    { row: 8, col: 6 },
-    { row: 8, col: 8 },
-    { row: 8, col: 10 },
-    { row: 8, col: 12 },
-    { row: 8, col: 14 },
-    { row: 10, col: 2 },
-    { row: 10, col: 4 },
-    { row: 10, col: 6 },
-    { row: 10, col: 8 },
-    { row: 10, col: 10 },
-    { row: 10, col: 12 },
-    { row: 10, col: 14 },
+    { posX: 60, posY: 60 },
+    { posX: 180, posY: 60 },
+    { posX: 300, posY: 60 },
+    { posX: 420, posY: 60 },
+    { posX: 540, posY: 60 },
+    { posX: 660, posY: 60 },
+    { posX: 780, posY: 60 },
+    { posX: 60, posY: 180 },
+    { posX: 180, posY: 180 },
+    { posX: 300, posY: 180 },
+    { posX: 420, posY: 180 },
+    { posX: 540, posY: 180 },
+    { posX: 660, posY: 180 },
+    { posX: 780, posY: 180 },
+    { posX: 60, posY: 300 },
+    { posX: 180, posY: 300 },
+    { posX: 300, posY: 300 },
+    { posX: 420, posY: 300 },
+    { posX: 540, posY: 300 },
+    { posX: 660, posY: 300 },
+    { posX: 780, posY: 300 },
+    { posX: 60, posY: 420 },
+    { posX: 180, posY: 420 },
+    { posX: 300, posY: 420 },
+    { posX: 420, posY: 420 },
+    { posX: 540, posY: 420 },
+    { posX: 660, posY: 420 },
+    { posX: 780, posY: 420 },
+    { posX: 60, posY: 540 },
+    { posX: 180, posY: 540 },
+    { posX: 300, posY: 540 },
+    { posX: 420, posY: 540 },
+    { posX: 540, posY: 540 },
+    { posX: 660, posY: 540 },
+    { posX: 780, posY: 540 },
   ];
 
 
@@ -67,11 +68,16 @@ function IcePinguin() {
   //Generate Fixed Ice Blocks 
   this.generateIceMap = function () {
     for (var i = 0; i < this.tableMap.length; i++) {
-      var cell = document.querySelector(`tr#row${this.tableMap[i].row} > td#col${this.tableMap[i].col}`);
-      cell.classList.add("ice-cube");
+      var newdiv = document.createElement("div" + i);
+        newdiv.id = "block" + i;        
+        newdiv.style.position = "absolute";
+        newdiv.classList.add("ice-cube");
+        newdiv.style.top = this.tableMap[i].posY + "px";
+        newdiv.style.left = this.tableMap[i].posX + "px";
+        map.appendChild(newdiv);
     }
   };
-
+    
   //Key-map
   this.mapKeys = function () {
     document.addEventListener("keydown", function (e) {
@@ -106,33 +112,35 @@ function IcePinguin() {
     self.iceBlockCollision("yeti");
     self.asignMovement("penguin");
     self.asignMovement("yeti");
-    self.yeti.paintEnemy();
     self.penguin.paintHero();
+    self.yeti.paintEnemy();    
   };
 
+
+  
   //Detect Ice Block Collision
   this.iceBlockCollision = function (char) {
     for (i = 0; i < self.tableMap.length; i++) {
       switch (self[char].direction) {
         case "right":
-          if (((self[char].posX + self[char].height + self[char].speed) > ((self.tableMap[i].col) * this.iceBlockWidth)) &&
-            ((self[char].posY) < (self.tableMap[i].row + 1) * this.iceBlockHeight) &&
-            ((self[char].posY + self[char].height) > (self.tableMap[i].row * this.iceBlockHeight))) { self[char].direction = "none" };
+          if (((self[char].posX + self[char].height + self[char].speed) > (self.tableMap[i].posX)) &&
+            ((self[char].posY + self[char].height) > (self.tableMap[i].posY)) &&
+            (self[char].posY < (self.tableMap[i].posY + this.iceBlockHeight))) { self[char].direction = "none" };
           break;
         case "down":
-          if (((self[char].posY + self[char].height + self[char].speed) > ((self.tableMap[i].row) * this.iceBlockHeight)) &&
-            ((self[char].posX) < (self.tableMap[i].col + 1) * this.iceBlockWidth) &&
-            ((self[char].posX + self[char].height) > (self.tableMap[i].col * this.iceBlockWidth))) { self[char].direction = "none" };
+          if (((self[char].posY + self[char].height + self[char].speed) > (self.tableMap[i].posY)) &&
+            ((self[char].posX) < (self.tableMap[i].posX) + this.iceBlockWidth) &&
+            ((self[char].posX + self[char].height) > self.tableMap[i].posX)) { self[char].direction = "none" };
           break;
         case "left":
-          if (((self[char].posX + self[char].height + self[char].speed) < ((self.tableMap[i].col + 1) * this.iceBlockWidth)) &&
-            ((self[char].posY) < (self.tableMap[i].row + 1) * this.iceBlockHeight) &&
-            ((self[char].posY + self[char].height) > (self.tableMap[i].row * this.iceBlockHeight))) { self[char].direction = "none" };
+          if ((self[char].posX + self[char].speed) < ((self.tableMap[i].posX + this.iceBlockWidth)) &&
+          ((self[char].posY + self[char].height) > (self.tableMap[i].posY)) &&
+          (self[char].posY) < (self.tableMap[i].posY + this.iceBlockHeight)) { self[char].direction = "none" };
           break;
         case "up":
-          if (((self[char].posY + self[char].speed) > ((self.tableMap[i].row + 1) * this.iceBlockHeight)) &&
-            ((self[char].posX) < (self.tableMap[i].col + 1) * this.iceBlockWidth) &&
-            ((self[char].posX + self[char].height) > (self.tableMap[i].col * this.iceBlockWidth))) { self[char].direction = "none" };
+          if ((self[char].posY + self[char].speed) > (self.tableMap[i].posY + this.iceBlockHeight) &&
+          ((self[char].posX) < (self.tableMap[i].posX) + this.iceBlockWidth) &&
+          ((self[char].posX + self[char].height) > self.tableMap[i].posX)) { self[char].direction = "none" };
           break;
       }
     }
@@ -150,19 +158,19 @@ function IcePinguin() {
   this.borderCollision = function (char) {
     switch (this[char].direction) {
       case "up":
-        if (this[char].posY - this[char].speed > 55) { game[char].style(); }
+        if (this[char].posY - this[char].speed > 0) { game[char].style(); }
         else { game[char].stop(); }
         break;
       case "right":
-        if (this[char].posX + this[char].speed < 920) { game[char].style(); }
+        if (this[char].posX + this[char].speed < 858) { game[char].style(); }
         else { game[char].stop(); }
         break;
       case "down":
-        if (this[char].posY + self[char].height + this[char].speed < 730) { game[char].style(); }
+        if (this[char].posY + self[char].height + this[char].speed < 660) { game[char].style(); }
         else { game[char].stop(); }
         break;
       case "left":
-        if (this[char].posX - this[char].speed > 60) { game[char].style(); }
+        if (this[char].posX - this[char].speed > 0) { game[char].style(); }
         else { game[char].stop(); }
         break;
       case "none":
@@ -174,25 +182,36 @@ function IcePinguin() {
   // Game Over 
   this.gameOver = function () {
     clearInterval(this.timerId);
-    this.musicini.pause();
+    musicini.pause();
+    this.gamemusic.pause();
     this.herodead.play();
     self.penguin.direction = "dead";
     self.yeti.direction = "win";
     game.penguin.style();
     game.yeti.style();    
     //this.container.style.display = "none";
-    //this.main.style.backgroundImage = "url(/source/graphics/fondogameover.png)";
+    //this.main.style.backgroundImage = "url(/source/graphics/fondogameover.png)";    
     //this.main.style.display = "block";
+    //game.penguin.deleteHero();
+    //game.yeti.deleteEnemy();
 
     }
 
   //StartGame
   this.startGame = function () {
+    musicini.pause();
+    this.gamemusic.play();
+    this.gamemusic.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.play();
+  }, false);
     this.container.style.display = "block";
     this.main.style.display = "none";    
     self.mapKeys();
     self.exitBtn();
     self.generateIceMap();
+    self.penguin.heroGenerate();
+    self.yeti.enemyGenerate();
     self.yeti.movementrdm();
     this.timerId = setInterval(this.moveControl, 0.1);
   };
@@ -200,12 +219,11 @@ function IcePinguin() {
 }
 
 //Game
-
-btnMain.onclick = function(){
-  
+musicini.play();
+btnMain.onclick = function(){  
   game = new IcePinguin(); 
   game.audiobtn.play();
   game.startGame();
-  game.musicini.play();
+  
   
 }

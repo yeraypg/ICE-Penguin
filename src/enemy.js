@@ -5,8 +5,18 @@ function Enemy() {
   this.direction = "none";
   this.speed = 2;
   this.height = 50;
-  this.posX = 550;
-  this.posY = 315; 
+  this.posX = 480;
+  this.posY = 360; 
+
+  this.enemyGenerate = function (){
+    this.enemy = document.createElement("div")
+    this.enemy.id = "enemy";   
+    map.appendChild(this.enemy); 
+  }
+
+  this.deleteEnemy = function (){
+    map.removeChild(this.enemy);
+  }
 
   //automatic aleatory movement -- 0 up / 1 down / 2 left / 3 right
   this.movementrdm = function () {

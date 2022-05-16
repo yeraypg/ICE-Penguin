@@ -5,8 +5,9 @@ html {
 
 #main {
   position: absolute;
-  height: 1020px;
+  height: 100%;
   width: 100%;
+  margin: 0 auto;
   background-image: url(/source/graphics/fondoinicio.png);
   background-repeat: no-repeat;
   background-size: contain;
@@ -14,9 +15,9 @@ html {
 }
 
 #btn-main {
-  position: relative;
-  margin-top: 300px;
-  margin-left: 980px;
+  position: absolute;
+  width: 100%;
+  margin: 545px auto;
   background: url(/source/graphics/botonstart.png) center;
   border: none;
   padding: 65px 160px;
@@ -27,6 +28,7 @@ html {
 
 #btn-main:active {
   background: url(/source/graphics/botonstartpulsado.png) center;
+  background-repeat: no-repeat;
 }
 
 .mrg-bottom-panel {
@@ -38,7 +40,7 @@ html {
 
 #btn-exit {
   position: absolute;
-  margin-top: 15px;
+  margin-top: 15px ;
   left: 790px;
   background: url(/source/graphics/botonexit.png) center;
   border: none;
@@ -73,19 +75,23 @@ html {
 
 #border-map {
   position: absolute;
+  height: 789px;
+  width: 1020px;
   border-left: 5px solid black;
   border-right: 5px solid black;
   background-image: url(/source/graphics/mapbackground.png);
-  background-size: 1020px 780px;
+  background-size: cover;
+  background-repeat: no-repeat;
   margin: 0 auto;
-  width: 1020px;
-  height: 780px;
+  
 }
 
 #map {
-  margin: 55px auto;
-  height: 700px;
+  position: relative;
+  margin: 70px auto;
+  height: 660px;
   width: 900px;
+  border: 1px solid black;
 }
 
 #bottom-panel {
@@ -113,9 +119,9 @@ html {
 #enemy {
   position: absolute;
   background-image: url(/source/graphics/yetileft.png);
-  background-size: 60px 60px;
-  width: 60px;
-  height: 60px;
+  background-size: 55px 55px;
+  width: 55px;
+  height: 55px;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -131,6 +137,7 @@ table {
 .ice-cube {
   background-image: url(/source/graphics/iceblock.png);
   background-position: center;
+  background-repeat: no-repeat;
   height: 60px;
   width: 60px;
 }

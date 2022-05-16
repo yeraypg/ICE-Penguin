@@ -1,11 +1,21 @@
 //Constructor Hero
 function Hero() {
-  this.hero = document.getElementById("hero");
+  this.hero
   this.direction = "none";
   this.speed = 3;
   this.height = 35;
-  this.posX = 75;
-  this.posY = 75;
+  this.posX = 5;
+  this.posY = 5;
+
+  this.heroGenerate = function (){
+    this.hero = document.createElement("div")
+    this.hero.id = "hero";    
+    map.appendChild(this.hero);
+  }
+
+  this.deleteHero = function (){
+    map.removeChild(this.hero);
+  }
 
   //Move Control - asign new Hero value to posX and posY 
 
@@ -25,11 +35,15 @@ function Hero() {
     this.posX -= this.speed;
   };
 
-  this.moveNone = function () {};
+  this.moveNone = function () {
+    this.posX -= 0;
+    this.posY -= 0;
+  };
 
   this.stop = function () {
-    this.direction = "none";
+    this.direction= "none";
     this.moveNone();
+
   };
 
   //refresh DOM position of Hero
