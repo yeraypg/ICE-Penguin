@@ -81,11 +81,13 @@ function IcePinguin() {
   //Key-map
   this.mapKeys = function () {
     document.addEventListener("keydown", function (e) {
+      console.log(e.key)
       switch (e.key) {
         case "ArrowUp": self.penguin.direction = "up"; break;
         case "ArrowRight": self.penguin.direction = "right"; break;
         case "ArrowDown": self.penguin.direction = "down"; break;
         case "ArrowLeft": self.penguin.direction = "left"; break;
+        case " ": self.penguin.placeBomb(); break;
       }
     });
     document.addEventListener("keyup", function (e) {
@@ -106,12 +108,13 @@ function IcePinguin() {
   this.moveControl = function () {
 
     self.charcollision("penguin", "yeti");
+    //self.bombcollision("yeti", "penguin.bomb");
     self.borderCollision("penguin");
     self.borderCollision("yeti");
     self.iceBlockCollision("penguin");
     self.iceBlockCollision("yeti");
     self.asignMovement("penguin");
-    self.asignMovement("yeti");
+    self.asignMovement("yeti");    
     self.penguin.paintHero();
     self.yeti.paintEnemy();    
   };
@@ -144,6 +147,14 @@ function IcePinguin() {
           break;
       }
     }
+  }
+
+  // Detect Bomb-Enemy Collision
+  this.bombcollision = function (char1, char2) {
+    if (self[char1].posX < self[char2].posX + self[char2].height &&
+      self[char1].posX + self[char1].height > self[char2].posX &&
+      self[char1].posY < self[char2].posY + self[char2].height &&
+      self[char1].height + self[char1].posY > self[char2].posY) { this.gameOver() };
   }
 
   // Detect Hero-Enemy Collision

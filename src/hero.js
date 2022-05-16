@@ -1,6 +1,10 @@
 //Constructor Hero
 function Hero() {
   this.hero
+  this.bomb = {
+    posX: 0,
+    posY: 0,
+    height: 30};
   this.direction = "none";
   this.speed = 3;
   this.height = 35;
@@ -17,8 +21,17 @@ function Hero() {
     map.removeChild(this.hero);
   }
 
+  this.placeBomb = function (){
+    this.bomb = document.createElement("div");
+    this.bomb.classList.add("bomb");
+    this.bomb.posX = this.posX + 15;
+    this.bomb.posY = this.posY + 15;    
+    game.map.appendChild(this.bomb);
+    this.bomb.style.top = this.bomb.posY + "px";
+    this.bomb.style.left = this.bomb.posX + "px";
+  }
+  
   //Move Control - asign new Hero value to posX and posY 
-
   this.moveUp = function () {
     this.posY -= this.speed;
   };
@@ -46,7 +59,7 @@ function Hero() {
 
   };
 
-  //refresh DOM position of Hero
+    //refresh DOM position of Hero
   this.paintHero = function () {
     this.hero.style.top = this.posY + "px";
     this.hero.style.left = this.posX + "px";

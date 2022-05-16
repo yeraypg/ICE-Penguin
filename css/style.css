@@ -108,6 +108,7 @@ html {
 }
 
 #hero {
+  z-index: 2;
   position: absolute;
   background-image: url(/source/graphics/penguistop.png);
   background-size: 35px 35px;
@@ -117,6 +118,7 @@ html {
   background-position: center;
 }
 #enemy {
+  z-index: 2;
   position: absolute;
   background-image: url(/source/graphics/yetileft.png);
   background-size: 55px 55px;
@@ -152,4 +154,15 @@ tr {
   border: none;
   height: 60px;
   width: 60px;
+}
+
+.bomb {
+  z-index: 1;
+  position: absolute;
+  background-image: url(/source/graphics/bola\ nieve.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  height: 30px;
+  width: 30px;
 }
