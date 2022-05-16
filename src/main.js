@@ -12,6 +12,7 @@ function IcePinguin() {
   this.timerEnemyMvt;
   this.penguin = new Hero();
   this.yeti = new Enemy();
+  this.bombs = new Array();
   this.iceBlockHeight = 62;
   this.iceBlockWidth = 60;
   this.gamemusic = new Audio("source/sounds/musicgame.ogg")
@@ -77,24 +78,42 @@ function IcePinguin() {
         map.appendChild(newdiv);
     }
   };
-    
+
+  this.generateBomb = function () {
+    var bomb = new Bomb(self.penguin.posX, self.penguin.posY)
+    self.bombs.push(bomb)
+  }
+
+this.paintBombs = function () {
+  for ( i = 0; i < this.bombs.length; i++) {
+    divBomb = document.createElement("div");
+    divBomb.id = "bomb" + i;
+    divBomb.style.position = "absolute";
+    divBomb.style.top = this.bombs[i].posY + "px"
+    divBomb.style.top = this.bombs[i].posX + "px"
+    this.map.appendChild(divBomb)
+
+  }
+  
+}
+
   //Key-map
   this.mapKeys = function () {
     document.addEventListener("keydown", function (e) {
-      console.log(e.key)
+      console.log(self.bombs)
       switch (e.key) {
         case "ArrowUp": self.penguin.direction = "up"; break;
         case "ArrowRight": self.penguin.direction = "right"; break;
         case "ArrowDown": self.penguin.direction = "down"; break;
         case "ArrowLeft": self.penguin.direction = "left"; break;
-        case " ": self.penguin.placeBomb(); break;
+        case " ": self.generateBomb(); break;
       }
     });
     document.addEventListener("keyup", function (e) {
       self.penguin.direction = "none";
     });
   };
-
+  
   this.asignMovement = function (char) {
     switch (this[char].direction) {
       case "up": game[char].moveUp(); break;
@@ -107,14 +126,14 @@ function IcePinguin() {
   }
   this.moveControl = function () {
 
-    self.charcollision("penguin", "yeti");
-    //self.bombcollision("yeti", "penguin.bomb");
+    self.charCollision("penguin", "yeti");
     self.borderCollision("penguin");
     self.borderCollision("yeti");
     self.iceBlockCollision("penguin");
     self.iceBlockCollision("yeti");
     self.asignMovement("penguin");
-    self.asignMovement("yeti");    
+    self.asignMovement("yeti");
+    self.paintBombs();    
     self.penguin.paintHero();
     self.yeti.paintEnemy();    
   };
@@ -150,7 +169,7 @@ function IcePinguin() {
   }
 
   // Detect Bomb-Enemy Collision
-  this.bombcollision = function (char1, char2) {
+  this.bombCollision = function (char1, char2) {
     if (self[char1].posX < self[char2].posX + self[char2].height &&
       self[char1].posX + self[char1].height > self[char2].posX &&
       self[char1].posY < self[char2].posY + self[char2].height &&
@@ -158,7 +177,7 @@ function IcePinguin() {
   }
 
   // Detect Hero-Enemy Collision
-  this.charcollision = function (char1, char2) {
+  this.charCollision = function (char1, char2) {
     if (self[char1].posX < self[char2].posX + self[char2].height &&
       self[char1].posX + self[char1].height > self[char2].posX &&
       self[char1].posY < self[char2].posY + self[char2].height &&
@@ -230,7 +249,7 @@ function IcePinguin() {
 }
 
 //Game
-musicini.play();
+//musicini.play();
 btnMain.onclick = function(){  
   game = new IcePinguin(); 
   game.audiobtn.play();
