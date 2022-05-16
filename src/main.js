@@ -13,6 +13,9 @@ function IcePinguin() {
   this.yeti = new Enemy();
   this.iceBlockHeight = 62;
   this.iceBlockWidth = 60;
+  this.musicini = new Audio("source/sounds/iceland.mp3");
+  this.herodead = new Audio("source/sounds/herodead.mp3");
+  this.audiobtn = new Audio("source/sounds/clickbutton.wav")
   this.tableMap = [
     { row: 2, col: 2 },
     { row: 2, col: 4 },
@@ -55,6 +58,7 @@ function IcePinguin() {
   //Exit-Btn
   this.exitBtn = function () {
     this.btnExit.addEventListener("click", function (e) {
+      game.audiobtn.play();
       self.gameOver();
     }
     )
@@ -170,6 +174,8 @@ function IcePinguin() {
   // Game Over 
   this.gameOver = function () {
     clearInterval(this.timerId);
+    this.musicini.pause();
+    this.herodead.play();
     self.penguin.direction = "dead";
     self.yeti.direction = "win";
     game.penguin.style();
@@ -183,7 +189,7 @@ function IcePinguin() {
   //StartGame
   this.startGame = function () {
     this.container.style.display = "block";
-    this.main.style.display = "none";
+    this.main.style.display = "none";    
     self.mapKeys();
     self.exitBtn();
     self.generateIceMap();
@@ -194,7 +200,12 @@ function IcePinguin() {
 }
 
 //Game
+
 btnMain.onclick = function(){
+  
   game = new IcePinguin(); 
+  game.audiobtn.play();
   game.startGame();
+  game.musicini.play();
+  
 }
