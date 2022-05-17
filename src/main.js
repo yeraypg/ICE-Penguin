@@ -3,12 +3,14 @@ musicini = new Audio("source/sounds/iceland.mp3");
 //Constructor New Game
 function IcePinguin() {
   self = this;
+  this.bombCounter = 0;
   this.map = document.getElementById("map");
   this.main = document.getElementById("main");
   this.container = document.getElementById("container");
   this.btnExit = document.getElementById("btn-exit");
   this.gameStatus;
   this.timerId;
+  this.timerBlowBomb;
   this.timerEnemyMvt;
   this.penguin = new Hero();
   this.yeti = new Enemy();
@@ -56,7 +58,6 @@ function IcePinguin() {
     { posX: 780, posY: 540 },
   ];
 
-
   //Exit-Btn
   this.exitBtn = function () {
     this.btnExit.addEventListener("click", function (e) {
@@ -69,38 +70,58 @@ function IcePinguin() {
   //Generate Fixed Ice Blocks 
   this.generateIceMap = function () {
     for (var i = 0; i < this.tableMap.length; i++) {
-      var newdiv = document.createElement("div" + i);
-        newdiv.id = "block" + i;        
-        newdiv.style.position = "absolute";
-        newdiv.classList.add("ice-cube");
-        newdiv.style.top = this.tableMap[i].posY + "px";
-        newdiv.style.left = this.tableMap[i].posX + "px";
-        map.appendChild(newdiv);
+      var newdiv = document.createElement("div");
+      newdiv.id = "block" + i;
+      newdiv.style.position = "absolute";
+      newdiv.classList.add("ice-cube");
+      newdiv.style.top = this.tableMap[i].posY + "px";
+      newdiv.style.left = this.tableMap[i].posX + "px";
+      map.appendChild(newdiv);
     }
   };
+  this.checkBombBlow = function () {
+    for (i = 0; i < this.bombs.length; i++) {
+      if (this.bombs[i].active = 0) { self.exploteBomb(i) };
 
+    }
+  }
+
+  //BOMB CODE
   this.generateBomb = function () {
-    var bomb = new Bomb(self.penguin.posX, self.penguin.posY)
-    self.bombs.push(bomb)
+    var bomb = new Bomb(self.penguin.posX, self.penguin.posY, this.bombCounter)
+    self.bombs.push(bomb);
+    this.styleBomb();
   }
 
-this.paintBombs = function () {
-  for ( i = 0; i < this.bombs.length; i++) {
-    divBomb = document.createElement("div");
-    divBomb.id = "bomb" + i;
+  this.styleBomb = function () {
+    var divBomb = document.createElement("div")
+    divBomb.id = "bomb" + this.bombCounter;
+    divBomb.classList.add("bomb");
     divBomb.style.position = "absolute";
-    divBomb.style.top = this.bombs[i].posY + "px"
-    divBomb.style.top = this.bombs[i].posX + "px"
-    this.map.appendChild(divBomb)
-
+    divBomb.style.top = (self.penguin.posY + 5) + "px";
+    divBomb.style.left = self.penguin.posX + "px";
+    this.map.appendChild(divBomb);
+    this.bombCounter++;
+    timerBlowBomb = setTimeout(function () {
+      self.exploteBomb(self.bombCounter);
+    }, 2000)
   }
-  
-}
+
+  this.exploteBomb = function (i) {
+    //explote()
+    this.removeBomb(self.bombs[0].divId);
+  }
+
+  this.removeBomb = function (id) {
+    remove = document.getElementById("bomb" + id)
+    map.removeChild(remove);
+    self.bombs.shift();
+  }
+
 
   //Key-map
   this.mapKeys = function () {
-    document.addEventListener("keydown", function (e) {
-      console.log(self.bombs)
+    document.addEventListener("keydown", function (e) {      
       switch (e.key) {
         case "ArrowUp": self.penguin.direction = "up"; break;
         case "ArrowRight": self.penguin.direction = "right"; break;
@@ -113,7 +134,7 @@ this.paintBombs = function () {
       self.penguin.direction = "none";
     });
   };
-  
+
   this.asignMovement = function (char) {
     switch (this[char].direction) {
       case "up": game[char].moveUp(); break;
@@ -133,13 +154,12 @@ this.paintBombs = function () {
     self.iceBlockCollision("yeti");
     self.asignMovement("penguin");
     self.asignMovement("yeti");
-    self.paintBombs();    
     self.penguin.paintHero();
-    self.yeti.paintEnemy();    
+    self.yeti.paintEnemy();
   };
 
 
-  
+
   //Detect Ice Block Collision
   this.iceBlockCollision = function (char) {
     for (i = 0; i < self.tableMap.length; i++) {
@@ -156,13 +176,13 @@ this.paintBombs = function () {
           break;
         case "left":
           if ((self[char].posX + self[char].speed) < ((self.tableMap[i].posX + this.iceBlockWidth)) &&
-          ((self[char].posY + self[char].height) > (self.tableMap[i].posY)) &&
-          (self[char].posY) < (self.tableMap[i].posY + this.iceBlockHeight)) { self[char].direction = "none" };
+            ((self[char].posY + self[char].height) > (self.tableMap[i].posY)) &&
+            (self[char].posY) < (self.tableMap[i].posY + this.iceBlockHeight)) { self[char].direction = "none" };
           break;
         case "up":
           if ((self[char].posY + self[char].speed) > (self.tableMap[i].posY + this.iceBlockHeight) &&
-          ((self[char].posX) < (self.tableMap[i].posX) + this.iceBlockWidth) &&
-          ((self[char].posX + self[char].height) > self.tableMap[i].posX)) { self[char].direction = "none" };
+            ((self[char].posX) < (self.tableMap[i].posX) + this.iceBlockWidth) &&
+            ((self[char].posX + self[char].height) > self.tableMap[i].posX)) { self[char].direction = "none" };
           break;
       }
     }
@@ -218,25 +238,25 @@ this.paintBombs = function () {
     self.penguin.direction = "dead";
     self.yeti.direction = "win";
     game.penguin.style();
-    game.yeti.style();    
+    game.yeti.style();
     //this.container.style.display = "none";
     //this.main.style.backgroundImage = "url(/source/graphics/fondogameover.png)";    
     //this.main.style.display = "block";
     //game.penguin.deleteHero();
     //game.yeti.deleteEnemy();
 
-    }
+  }
 
   //StartGame
   this.startGame = function () {
     musicini.pause();
     this.gamemusic.play();
-    this.gamemusic.addEventListener('ended', function() {
+    this.gamemusic.addEventListener('ended', function () {
       this.currentTime = 0;
       this.play();
-  }, false);
+    }, false);
     this.container.style.display = "block";
-    this.main.style.display = "none";    
+    this.main.style.display = "none";
     self.mapKeys();
     self.exitBtn();
     self.generateIceMap();
@@ -250,10 +270,10 @@ this.paintBombs = function () {
 
 //Game
 //musicini.play();
-btnMain.onclick = function(){  
-  game = new IcePinguin(); 
+btnMain.onclick = function () {
+  game = new IcePinguin();
   game.audiobtn.play();
   game.startGame();
-  
-  
+
+
 }

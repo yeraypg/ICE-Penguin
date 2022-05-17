@@ -159,10 +159,15 @@ tr {
 .bomb {
   z-index: 1;
   position: absolute;
-  background-image: url(/source/graphics/bola\ nieve.png);
+  background-image: url(/source/graphics/bola\ nieve\ 1.png);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 30px 30px;
-  height: 30px;
-  width: 30px;
+  background-size: 35px 35px;
+  height: 35px;
+  width: 35px;
+}
+
+.bomb-blow {
+  height: 60px;
+  width: 60px;
 }
