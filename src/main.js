@@ -96,10 +96,10 @@ function IcePinguin() {
   this.styleBomb = function () {
     var divBomb = document.createElement("div")
     divBomb.id = "bomb" + this.bombCounter;
-    divBomb.classList.add("bomb");
+    divBomb.classList.add("bomb-blow");
     divBomb.style.position = "absolute";
-    divBomb.style.top = (self.penguin.posY + 5) + "px";
-    divBomb.style.left = self.penguin.posX + "px";
+    divBomb.style.top = (self.penguin.posY - 25) + "px";
+    divBomb.style.left = (self.penguin.posX -15) + "px";
     this.map.appendChild(divBomb);
     this.bombCounter++;
     timerBlowBomb = setTimeout(function () {
@@ -108,6 +108,7 @@ function IcePinguin() {
   }
 
   this.exploteBomb = function (i) {
+    explote = document.getElementById("bomb"+ i);
     //explote()
     this.removeBomb(self.bombs[0].divId);
   }

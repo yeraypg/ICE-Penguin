@@ -110,12 +110,11 @@ html {
 #hero {
   z-index: 2;
   position: absolute;
-  background-image: url(/source/graphics/penguistop.png);
-  background-size: 35px 35px;
+  background: url(/source/graphics/penguistop.png);
   width: 35px;
   height: 35px;
   background-repeat: no-repeat;
-  background-position: center;
+  animation: penguin-walk 1s steps(3) infinite;
 }
 #enemy {
   z-index: 2;
@@ -159,7 +158,7 @@ tr {
 .bomb {
   z-index: 1;
   position: absolute;
-  background-image: url(/source/graphics/bola\ nieve\ 1.png);
+  background: url(/source/graphics/bola\ nieve\ 1.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 35px 35px;
@@ -170,4 +169,26 @@ tr {
 .bomb-blow {
   height: 60px;
   width: 60px;
+  background: url(/source/graphics/blow-right-left.png);
+  margin: 0 auto;
+  animation: bomb 1s steps(3) infinite;
+}
+
+@keyframes bomb {
+  0%{
+    background-position: 0px;
+
+  }
+  100%{
+    background-position: -180px;
+  }
+}
+
+@keyframes penguin-walk {
+  0%{
+    background-position: 0px;
+  }
+  100%{
+    background-position: -105px;
+  }
 }

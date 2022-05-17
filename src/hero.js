@@ -66,19 +66,19 @@ function Hero() {
     switch (this.direction) {
       case "up":
         game.penguin.hero.style.backgroundImage =
-          "url(/source/graphics/penguiup.png)";
+          "url(/source/graphics/penguiupanim.png)";
         break;
       case "right":
         game.penguin.hero.style.backgroundImage =
-          "url(/source/graphics/penguiright.png)";
+          "url(/source/graphics/penguirightanim.png)";
         break;
       case "down":
         game.penguin.hero.style.backgroundImage =
-          "url(/source/graphics/penguidown.png)";
+          "url(/source/graphics/penguidownanim.png)";
         break;
       case "left":
         game.penguin.hero.style.backgroundImage =
-          "url(/source/graphics/penguileft.png)";
+          "url(/source/graphics/penguileftanim.png)";
         break;
       case "none":
         game.penguin.hero.style.backgroundImage =
