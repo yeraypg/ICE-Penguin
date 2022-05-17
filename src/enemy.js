@@ -3,7 +3,7 @@ function Enemy() {
   this.idMovement;
   this.enemy = document.getElementById("enemy");
   this.direction = "none";
-  this.speed = 2;
+  this.speed = 2.5;
   this.height = 50;
   this.posX = 480;
   this.posY = 360;
@@ -14,11 +14,9 @@ function Enemy() {
     map.appendChild(this.enemy);
   };
 
-  this.enemyDead = function (){
-    console.log("funcion EnemyDead")
-  
-    
-  }
+  this.enemyDead = function () {
+    console.log("funcion EnemyDead");
+  };
 
   this.deleteEnemy = function () {
     map.removeChild(this.enemy);
@@ -100,9 +98,8 @@ function Enemy() {
           "url(/source/graphics/yetileft.png)";
         break;
       case "dead":
-        game.yeti.enemy.classList.add("enemydead");
         game.yeti.enemy.style.backgroundImage =
-          "url(/source/graphics/yetidead.png)";
+          "url(/source/graphics/yetidead2.png)";
         break;
     }
   };

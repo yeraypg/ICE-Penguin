@@ -21,6 +21,9 @@ function IcePinguin() {
   this.gamemusic = new Audio("source/sounds/musicgame.ogg");
   this.herodead = new Audio("source/sounds/herodead.mp3");
   this.audiobtn = new Audio("source/sounds/clickbutton.wav");
+  this.herowin = new Audio("source/sounds/musicwin.wav");
+  this.placeBomb = new Audio("source/sounds/placebomb.ogg");
+  this.blowBomb = new Audio("source/sounds/blowbomb.mp3");
   this.tableMap = [
     { posX: 60, posY: 60 },
     { posX: 180, posY: 60 },
@@ -63,7 +66,13 @@ function IcePinguin() {
   this.exitBtn = function () {
     this.btnExit.addEventListener("click", function (e) {
       game.audiobtn.play();
-      self.gameOver();
+      clearInterval(this.timerId);
+      musicini.pause();
+      self.gamemusic.pause();
+      self.container.style.display = "none";
+      self.main.style.display = "block";
+      game.penguin.deleteHero();
+      game.yeti.deleteEnemy();
     });
   };
 
@@ -92,8 +101,8 @@ function IcePinguin() {
     divBomb.id = "bomb" + this.bombCounter;
     divBomb.classList.add("bomb");
     divBomb.style.position = "absolute";
-    divBomb.style.top = (self.penguin.posY + 10) + "px";
-    divBomb.style.left = (self.penguin.posX + 5) + "px";
+    divBomb.style.top = self.penguin.posY + 10 + "px";
+    divBomb.style.left = self.penguin.posX + 5 + "px";
     this.map.appendChild(divBomb);
     this.bombCounter++;
     timerBlowBomb = setTimeout(function () {
@@ -102,79 +111,104 @@ function IcePinguin() {
   };
 
   this.exploteBomb = function (i) {
-   // explote = document.getElementById("bomb" + i);
+    // explote = document.getElementById("bomb" + i);
     this.expandBombUp(i);
     this.expandBombDown(i);
     this.expandBombLeft(i);
     this.expandBombRight(i);
-
+    this.blowBomb.play();
     //explote()
     this.removeBomb(self.bombs[0].divId);
   };
 
   this.deleteExpand = function (i) {
-    remove = document.getElementById(i)
-    map.removeChild(remove)
-  }
+    remove = document.getElementById(i);
+    map.removeChild(remove);
+  };
 
-  this.expandBombUp = function (i){
-    var bombExpand = document.createElement("div");    
+  this.expandBombUp = function (i) {
+    var bombExpand = document.createElement("div");
     bombExpand.id = "expandUp" + i;
     bombExpand.classList.add("bomb-expand-up");
     bombExpand.style.top = self.bombs[0].posY - 180 + "px";
     bombExpand.style.left = self.bombs[0].posX + "px";
-    if (self.bombs[0].posY > 60){
+    if (self.bombs[0].posY > 60) {
       this.map.appendChild(bombExpand);
-      if (self.yeti.posX < self.bombs[0].posX + 50 && self.yeti.posX + self.yeti.height > self.bombs[0].posX &&
-        self.yeti.posY + self.yeti.height > self.bombs[0].posY){console.log("Collision Up");self.gameWin()}
-      timerExpandBomb = setTimeout(function(){
-      self.deleteExpand(bombExpand.id)
-    },1000)
+      if (
+        self.yeti.posX < self.bombs[0].posX + 50 &&
+        self.yeti.posX + self.yeti.height > self.bombs[0].posX &&
+        self.yeti.posY + self.yeti.height > self.bombs[0].posY - 180
+      ) {
+        self.gameWin();
+      }
+      timerExpandBomb = setTimeout(function () {
+        self.deleteExpand(bombExpand.id);
+      }, 1000);
     }
-  }
+  };
 
-  this.expandBombDown = function (i){
+  this.expandBombDown = function (i) {
     var bombExpand = document.createElement("div");
     bombExpand.id = "expandDown" + i;
     bombExpand.classList.add("bomb-expand-up");
-    bombExpand.style.top = (self.bombs[0].posY + 35) + "px";
+    bombExpand.style.top = self.bombs[0].posY + 35 + "px";
     bombExpand.style.left = self.bombs[0].posX + "px";
-    if (self.bombs[0].posY < 590){
+    if (self.bombs[0].posY < 590) {
       this.map.appendChild(bombExpand);
-      timerExpandBomb = setTimeout(function(){
-        self.deleteExpand(bombExpand.id)
-      },1000)
+      if (
+        self.yeti.posX < self.bombs[0].posX + 50 &&
+        self.yeti.posX + self.yeti.height > self.bombs[0].posX &&
+        self.yeti.posY < self.bombs[0].posY + 240
+      ) {
+        self.gameWin();
+      }
+      timerExpandBomb = setTimeout(function () {
+        self.deleteExpand(bombExpand.id);
+      }, 1000);
     }
-  }
+  };
 
-  this.expandBombLeft = function (i){
+  this.expandBombLeft = function (i) {
     var bombExpand = document.createElement("div");
     bombExpand.id = "expandLeft" + i;
     bombExpand.classList.add("bomb-expand-left");
-    bombExpand.style.top = (self.bombs[0].posY - 12) + "px";
-    bombExpand.style.left = (self.bombs[0].posX - 180) + "px";
+    bombExpand.style.top = self.bombs[0].posY - 12 + "px";
+    bombExpand.style.left = self.bombs[0].posX - 180 + "px";
     if (self.bombs[0].posX > 60) {
       this.map.appendChild(bombExpand);
-      timerExpandBomb = setTimeout(function(){
-        self.deleteExpand(bombExpand.id)
-      },1000)
+      if (
+        self.yeti.posX > self.bombs[0].posX - 180 &&
+        self.yeti.posY + self.yeti.height > self.bombs[0].posY &&
+        self.yeti.posY < self.bombs[0].posY + 60
+      ) {
+        self.gameWin();
+      }
+      timerExpandBomb = setTimeout(function () {
+        self.deleteExpand(bombExpand.id);
+      }, 1000);
     }
-  }
+  };
 
-  this.expandBombRight = function (i){
+  this.expandBombRight = function (i) {
     var bombExpand = document.createElement("div");
     bombExpand.id = "expandRight" + i;
     bombExpand.classList.add("bomb-expand-left");
-    bombExpand.style.top = (self.bombs[0].posY - 12) + "px";
-    bombExpand.style.left = (self.bombs[0].posX + 60) + "px";
-    this.map.appendChild(bombExpand);
-    if (self.bombs[0].posX < 500) {
+    bombExpand.style.top = self.bombs[0].posY - 12 + "px";
+    bombExpand.style.left = self.bombs[0].posX + 60 + "px";
+    if (self.bombs[0].posX < 820) {
       this.map.appendChild(bombExpand);
-      timerExpandBomb = setTimeout(function(){
-        self.deleteExpand(bombExpand.id)
-      },1000)
+      if (
+        self.yeti.posX < self.bombs[0].posX + 240 &&
+        self.yeti.posY + self.yeti.height > self.bombs[0].posY &&
+        self.yeti.posY < self.bombs[0].posY + 60
+      ) {
+        self.gameWin();
+      }
+      timerExpandBomb = setTimeout(function () {
+        self.deleteExpand(bombExpand.id);
+      }, 1000);
     }
-  }
+  };
 
   this.removeBomb = function (id) {
     remove = document.getElementById("bomb" + id);
@@ -200,6 +234,7 @@ function IcePinguin() {
           break;
         case " ":
           self.generateBomb();
+          self.placeBomb.play();
           break;
       }
     });
@@ -351,7 +386,6 @@ function IcePinguin() {
   // Game Win
 
   this.gameWin = function () {
-    clearInterval(this.timerId);
     musicini.pause();
     this.gamemusic.pause();
     this.herowin.play();
@@ -359,7 +393,18 @@ function IcePinguin() {
     self.yeti.direction = "dead";
     game.penguin.style();
     game.yeti.style();
-  }
+    self.yeti.paintEnemy();
+    clearInterval(this.timerId);
+    setTimeout(function () {
+      self.container.style.display = "none";
+      self.main.style.backgroundImage = "url(/source/graphics/fondowin.png)";
+      self.main.style.display = "block";
+      self.main.style.height = "100%";
+      self.main.style.width = "100%";
+      game.penguin.deleteHero();
+      game.yeti.deleteEnemy();
+    }, 1500);
+  };
 
   // Game Over
   this.gameOver = function () {
@@ -371,11 +416,16 @@ function IcePinguin() {
     self.yeti.direction = "win";
     game.penguin.style();
     game.yeti.style();
-    //this.container.style.display = "none";
-    //this.main.style.backgroundImage = "url(/source/graphics/fondogameover.png)";
-    //this.main.style.display = "block";
-    //game.penguin.deleteHero();
-    //game.yeti.deleteEnemy();
+    setTimeout(function () {
+      self.container.style.display = "none";
+      self.main.style.backgroundImage =
+        "url(/source/graphics/fondogameover.png)";
+      self.main.style.display = "block";
+      self.main.style.height = "100%";
+      self.main.style.width = "100%";
+      game.penguin.deleteHero();
+      game.yeti.deleteEnemy();
+    }, 1500);
   };
 
   //StartGame

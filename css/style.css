@@ -10,14 +10,14 @@ html {
   margin: 0 auto;
   background-image: url(/source/graphics/fondoinicio.png);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: content;
   background-position: center;
 }
 
 #btn-main {
   position: absolute;
   width: 100%;
-  margin: 545px auto;
+  margin: 475px auto;
   background: url(/source/graphics/botonstart.png) center;
   border: none;
   padding: 65px 160px;
@@ -127,14 +127,6 @@ html {
   background-position: center;
 }
 
-.enemydead{
-  height: 50px;
-  width: 50px;
-  background: url(/source/graphics/yetidead.png);
-  margin: 0 auto;
-  animation: enemydead 1s steps(3);
-}
-
 table {
   height: 660px;
   width: 900px;
@@ -182,7 +174,7 @@ tr {
   animation: bomb 1s steps(3) infinite;
 }
 
-.bomb-expand-up{
+.bomb-expand-up {
   z-index: 98;
   position: absolute;
   height: 180px;
@@ -192,7 +184,7 @@ tr {
   animation: bomb-explote-updown 1s steps(3) infinite;
 }
 
-.bomb-expand-left{
+.bomb-expand-left {
   z-index: 98;
   position: absolute;
   height: 60px;
@@ -211,7 +203,7 @@ tr {
   }
 }
 
-@keyframes bomb-explote-leftright{
+@keyframes bomb-explote-leftright {
   0% {
     background-position: 0px;
   }
@@ -220,7 +212,7 @@ tr {
   }
 }
 
-@keyframes bomb-explote-updown{
+@keyframes bomb-explote-updown {
   0% {
     background-position: 0px;
   }
@@ -235,14 +227,5 @@ tr {
   }
   100% {
     background-position: -105px;
-  }
-}
-
-@keyframes enemydead {
-  0% {
-    background-position: 0px;
-  }
-  100% {
-    background-position: -150px;
   }
 }
