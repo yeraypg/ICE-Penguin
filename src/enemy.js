@@ -6,17 +6,23 @@ function Enemy() {
   this.speed = 2;
   this.height = 50;
   this.posX = 480;
-  this.posY = 360; 
+  this.posY = 360;
 
-  this.enemyGenerate = function (){
-    this.enemy = document.createElement("div")
-    this.enemy.id = "enemy";   
-    map.appendChild(this.enemy); 
+  this.enemyGenerate = function () {
+    this.enemy = document.createElement("div");
+    this.enemy.id = "enemy";
+    map.appendChild(this.enemy);
+  };
+
+  this.enemyDead = function (){
+    console.log("funcion EnemyDead")
+  
+    
   }
 
-  this.deleteEnemy = function (){
+  this.deleteEnemy = function () {
     map.removeChild(this.enemy);
-  }
+  };
 
   //automatic aleatory movement -- 0 up / 1 down / 2 left / 3 right
   this.movementrdm = function () {
@@ -93,9 +99,10 @@ function Enemy() {
         game.yeti.enemy.style.backgroundImage =
           "url(/source/graphics/yetileft.png)";
         break;
-      case "win":
+      case "dead":
+        game.yeti.enemy.classList.add("enemydead");
         game.yeti.enemy.style.backgroundImage =
-          "url(/source/graphics/yetiwin.png)";
+          "url(/source/graphics/yetidead.png)";
         break;
     }
   };

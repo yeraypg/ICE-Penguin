@@ -40,7 +40,7 @@ html {
 
 #btn-exit {
   position: absolute;
-  margin-top: 15px ;
+  margin-top: 15px;
   left: 790px;
   background: url(/source/graphics/botonexit.png) center;
   border: none;
@@ -64,6 +64,7 @@ html {
 }
 
 #top-panel {
+  z-index: 99;
   height: 100px;
   width: 1020px;
   border: none;
@@ -83,7 +84,6 @@ html {
   background-size: 1020px 770px;
   background-repeat: no-repeat;
   margin: 0 auto;
-  
 }
 
 #map {
@@ -91,10 +91,10 @@ html {
   margin: 70px auto;
   height: 660px;
   width: 900px;
- 
 }
 
 #bottom-panel {
+  z-index: 99;
   position: absolute;
   top: 950px;
   width: auto;
@@ -125,6 +125,14 @@ html {
   height: 55px;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.enemydead{
+  height: 50px;
+  width: 50px;
+  background: url(/source/graphics/yetidead.png);
+  margin: 0 auto;
+  animation: enemydead 1s steps(3);
 }
 
 table {
@@ -169,26 +177,72 @@ tr {
 .bomb-blow {
   height: 60px;
   width: 60px;
-  background: url(/source/graphics/blow-right-left.png);
+  background: url();
   margin: 0 auto;
   animation: bomb 1s steps(3) infinite;
 }
 
-@keyframes bomb {
-  0%{
-    background-position: 0px;
+.bomb-expand-up{
+  z-index: 98;
+  position: absolute;
+  height: 180px;
+  width: 60px;
+  margin: 0 auto;
+  background: url(/source/graphics/blow-up-down.png);
+  animation: bomb-explote-updown 1s steps(3) infinite;
+}
 
+.bomb-expand-left{
+  z-index: 98;
+  position: absolute;
+  height: 60px;
+  width: 180px;
+  margin: 0 auto;
+  background: url(/source/graphics/blow-right-left.png);
+  animation: bomb-explote-leftright 1s steps(3) infinite;
+}
+
+@keyframes bomb {
+  0% {
+    background-position: 0px;
   }
-  100%{
+  100% {
+    background-position: -180px;
+  }
+}
+
+@keyframes bomb-explote-leftright{
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -540px;
+  }
+}
+
+@keyframes bomb-explote-updown{
+  0% {
+    background-position: 0px;
+  }
+  100% {
     background-position: -180px;
   }
 }
 
 @keyframes penguin-walk {
-  0%{
+  0% {
     background-position: 0px;
   }
-  100%{
+  100% {
     background-position: -105px;
+  }
+}
+
+@keyframes enemydead {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -150px;
   }
 }

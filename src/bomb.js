@@ -9,4 +9,3 @@ function Bomb(posX, posY, id) {
     this.directionRight = 1;
 
 }
-
