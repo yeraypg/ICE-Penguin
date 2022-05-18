@@ -8,7 +8,7 @@ html {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  background-image: url(/source/graphics/fondoinicio.png);
+  background-image: url(../assets/graphics/fondoinicio.png);
   background-repeat: no-repeat;
   background-size: content;
   background-position: center;
@@ -18,7 +18,7 @@ html {
   position: absolute;
   width: 100%;
   margin: 475px auto;
-  background: url(/source/graphics/botonstart.png) center;
+  background: url(../assets/graphics/botonstart.png) center;
   border: none;
   padding: 65px 160px;
   background-repeat: no-repeat;
@@ -27,7 +27,7 @@ html {
 }
 
 #btn-main:active {
-  background: url(/source/graphics/botonstartpulsado.png) center;
+  background: url(../assets/graphics/botonstartpulsado.png) center;
   background-repeat: no-repeat;
 }
 
@@ -42,7 +42,7 @@ html {
   position: absolute;
   margin-top: 15px;
   left: 790px;
-  background: url(/source/graphics/botonexit.png) center;
+  background: url(../assets/graphics/botonexit.png) center;
   border: none;
   padding: 35px 95px;
   background-repeat: no-repeat;
@@ -51,7 +51,7 @@ html {
 }
 
 #btn-exit:active {
-  background: url(/source/graphics/botonexitpulsado.png) center;
+  background: url(../assets/graphics/botonexitpulsado.png) center;
 }
 
 #container {
@@ -71,7 +71,7 @@ html {
   border-top: 5px solid black;
   border-left: 5px solid black;
   border-right: 5px solid black;
-  background-image: url(/source/graphics/mapfloor.png);
+  background-image: url(../assets/graphics/mapfloor.png);
 }
 
 #border-map {
@@ -80,7 +80,7 @@ html {
   width: 1020px;
   border-left: 5px solid black;
   border-right: 5px solid black;
-  background-image: url(/source/graphics/mapbackground.png);
+  background-image: url(../assets/graphics/mapbackground.png);
   background-size: 1020px 770px;
   background-repeat: no-repeat;
   margin: 0 auto;
@@ -104,13 +104,13 @@ html {
   border-bottom: 5px solid black;
   border-left: 5px solid black;
   border-right: 5px solid black;
-  background-image: url(/source/graphics/mapfloor.png);
+  background-image: url(../assets/graphics/mapfloor.png);
 }
 
 #hero {
   z-index: 2;
   position: absolute;
-  background: url(/source/graphics/penguistop.png);
+  background: url(../assets/graphics/penguistop.png);
   width: 35px;
   height: 35px;
   background-repeat: no-repeat;
@@ -119,7 +119,7 @@ html {
 #enemy {
   z-index: 2;
   position: absolute;
-  background-image: url(/source/graphics/yetileft.png);
+  background-image: url(../assets/graphics/yetileft.png);
   background-size: 55px 55px;
   width: 55px;
   height: 55px;
@@ -136,7 +136,7 @@ table {
 }
 
 .ice-cube {
-  background-image: url(/source/graphics/iceblock.png);
+  background-image: url(../assets/graphics/iceblock.png);
   background-position: center;
   background-repeat: no-repeat;
   height: 60px;
@@ -158,7 +158,7 @@ tr {
 .bomb {
   z-index: 1;
   position: absolute;
-  background: url(/source/graphics/bola\ nieve\ 1.png);
+  background: url(../assets/graphics/bola\ nieve\ 1.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 35px 35px;
@@ -179,8 +179,8 @@ tr {
   position: absolute;
   height: 180px;
   width: 60px;
-  margin: 0 auto;
-  background: url(/source/graphics/blow-up-down.png);
+  margin: 0 auto;  
+  background: url(../assets/graphics/blow-up-down.png);
   animation: bomb-explote-updown 1s steps(3) infinite;
 }
 
@@ -190,7 +190,7 @@ tr {
   height: 60px;
   width: 180px;
   margin: 0 auto;
-  background: url(/source/graphics/blow-right-left.png);
+  background: url(../assets/graphics/blow-right-left.png);
   animation: bomb-explote-leftright 1s steps(3) infinite;
 }
 

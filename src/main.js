@@ -1,5 +1,5 @@
 var btnMain = document.getElementById("btn-main");
-musicini = new Audio("source/sounds/iceland.mp3");
+musicini = new Audio("./assets/sounds/iceland.mp3");
 //Constructor New Game
 function IcePinguin() {
   self = this;
@@ -12,18 +12,20 @@ function IcePinguin() {
   this.timerId;
   this.timerBlowBomb;
   this.timerExpandBomb;
-  this.timerEnemyMvt;
   this.penguin = new Hero();
   this.yeti = new Enemy();
   this.bombs = new Array();
   this.iceBlockHeight = 62;
   this.iceBlockWidth = 60;
-  this.gamemusic = new Audio("source/sounds/musicgame.ogg");
-  this.herodead = new Audio("source/sounds/herodead.mp3");
-  this.audiobtn = new Audio("source/sounds/clickbutton.wav");
-  this.herowin = new Audio("source/sounds/musicwin.wav");
-  this.placeBomb = new Audio("source/sounds/placebomb.ogg");
-  this.blowBomb = new Audio("source/sounds/blowbomb.mp3");
+  //Music and sound FX
+  this.gameMusic = new Audio("./assets/sounds/musicgame.ogg");
+  this.herodead = new Audio("./assets/sounds/herodead.mp3");
+  this.audiobtn = new Audio("./assets/sounds/clickbutton.wav");
+  this.herowin = new Audio("./assets/sounds/musicwin.wav");
+  this.placeBomb = new Audio("./assets/sounds/placebomb.ogg");
+  this.blowBomb = new Audio("./assets/sounds/blowbomb.mp3");
+
+  // Ice-Block Map Position
   this.tableMap = [
     { posX: 60, posY: 60 },
     { posX: 180, posY: 60 },
@@ -67,8 +69,12 @@ function IcePinguin() {
     this.btnExit.addEventListener("click", function (e) {
       game.audiobtn.play();
       clearInterval(this.timerId);
+      clearInterval(self.yeti.timerEnemyMvt);
+      clearInterval(this.timerBlowBomb);
+      clearInterval(this.timerExpandBomb);
       musicini.pause();
-      self.gamemusic.pause();
+      self.gameMusic.pause();
+      self.main.style.backgroundImage = "url(./assets/graphics/fondoinicio.png)";
       self.container.style.display = "none";
       self.main.style.display = "block";
       game.penguin.deleteHero();
@@ -111,13 +117,11 @@ function IcePinguin() {
   };
 
   this.exploteBomb = function (i) {
-    // explote = document.getElementById("bomb" + i);
     this.expandBombUp(i);
     this.expandBombDown(i);
     this.expandBombLeft(i);
     this.expandBombRight(i);
     this.blowBomb.play();
-    //explote()
     this.removeBomb(self.bombs[0].divId);
   };
 
@@ -134,13 +138,10 @@ function IcePinguin() {
     bombExpand.style.left = self.bombs[0].posX + "px";
     if (self.bombs[0].posY > 60) {
       this.map.appendChild(bombExpand);
-      if (
-        self.yeti.posX < self.bombs[0].posX + 50 &&
-        self.yeti.posX + self.yeti.height > self.bombs[0].posX &&
-        self.yeti.posY + self.yeti.height > self.bombs[0].posY - 180
-      ) {
-        self.gameWin();
-      }
+      if (self.yeti.posX < (self.bombs[0].posX + 50) &&
+        (self.yeti.posX + self.yeti.height) > self.bombs[0].posX &&
+        (self.yeti.posY + self.yeti.height) > (self.bombs[0].posY - 180) &&
+        self.yeti.posY < self.bombs[0].posY) { self.gameWin(); }
       timerExpandBomb = setTimeout(function () {
         self.deleteExpand(bombExpand.id);
       }, 1000);
@@ -158,10 +159,8 @@ function IcePinguin() {
       if (
         self.yeti.posX < self.bombs[0].posX + 50 &&
         self.yeti.posX + self.yeti.height > self.bombs[0].posX &&
-        self.yeti.posY < self.bombs[0].posY + 240
-      ) {
-        self.gameWin();
-      }
+        self.yeti.posY < (self.bombs[0].posY + 240) &&
+        self.yeti.posY > self.bombs[0].posY) { self.gameWin(); }
       timerExpandBomb = setTimeout(function () {
         self.deleteExpand(bombExpand.id);
       }, 1000);
@@ -179,10 +178,8 @@ function IcePinguin() {
       if (
         self.yeti.posX > self.bombs[0].posX - 180 &&
         self.yeti.posY + self.yeti.height > self.bombs[0].posY &&
-        self.yeti.posY < self.bombs[0].posY + 60
-      ) {
-        self.gameWin();
-      }
+        self.yeti.posY < (self.bombs[0].posY + 60) &&
+        self.yeti.posX < self.bombs[0].posX) { self.gameWin(); }
       timerExpandBomb = setTimeout(function () {
         self.deleteExpand(bombExpand.id);
       }, 1000);
@@ -200,10 +197,8 @@ function IcePinguin() {
       if (
         self.yeti.posX < self.bombs[0].posX + 240 &&
         self.yeti.posY + self.yeti.height > self.bombs[0].posY &&
-        self.yeti.posY < self.bombs[0].posY + 60
-      ) {
-        self.gameWin();
-      }
+        self.yeti.posY < (self.bombs[0].posY + 60) &&
+        self.yeti.posX + self.yeti.height > self.bombs[0].posX) { self.gameWin(); }
       timerExpandBomb = setTimeout(function () {
         self.deleteExpand(bombExpand.id);
       }, 1000);
@@ -281,7 +276,7 @@ function IcePinguin() {
         case "right":
           if (
             self[char].posX + self[char].height + self[char].speed >
-              self.tableMap[i].posX &&
+            self.tableMap[i].posX &&
             self[char].posY + self[char].height > self.tableMap[i].posY &&
             self[char].posY < self.tableMap[i].posY + this.iceBlockHeight
           ) {
@@ -291,7 +286,7 @@ function IcePinguin() {
         case "down":
           if (
             self[char].posY + self[char].height + self[char].speed >
-              self.tableMap[i].posY &&
+            self.tableMap[i].posY &&
             self[char].posX < self.tableMap[i].posX + this.iceBlockWidth &&
             self[char].posX + self[char].height > self.tableMap[i].posX
           ) {
@@ -301,7 +296,7 @@ function IcePinguin() {
         case "left":
           if (
             self[char].posX + self[char].speed <
-              self.tableMap[i].posX + this.iceBlockWidth &&
+            self.tableMap[i].posX + this.iceBlockWidth &&
             self[char].posY + self[char].height > self.tableMap[i].posY &&
             self[char].posY < self.tableMap[i].posY + this.iceBlockHeight
           ) {
@@ -311,7 +306,7 @@ function IcePinguin() {
         case "up":
           if (
             self[char].posY + self[char].speed >
-              self.tableMap[i].posY + this.iceBlockHeight &&
+            self.tableMap[i].posY + this.iceBlockHeight &&
             self[char].posX < self.tableMap[i].posX + this.iceBlockWidth &&
             self[char].posX + self[char].height > self.tableMap[i].posX
           ) {
@@ -387,7 +382,7 @@ function IcePinguin() {
 
   this.gameWin = function () {
     musicini.pause();
-    this.gamemusic.pause();
+    this.gameMusic.pause();
     this.herowin.play();
     self.penguin.direction = "win";
     self.yeti.direction = "dead";
@@ -395,9 +390,12 @@ function IcePinguin() {
     game.yeti.style();
     self.yeti.paintEnemy();
     clearInterval(this.timerId);
+    clearInterval(self.yeti.timerEnemyMvt);
+    clearInterval(this.timerBlowBomb);
+    clearInterval(this.timerExpandBomb);
     setTimeout(function () {
       self.container.style.display = "none";
-      self.main.style.backgroundImage = "url(/source/graphics/fondowin.png)";
+      self.main.style.backgroundImage = "url(./assets/graphics/fondowin.png)";
       self.main.style.display = "block";
       self.main.style.height = "100%";
       self.main.style.width = "100%";
@@ -409,8 +407,11 @@ function IcePinguin() {
   // Game Over
   this.gameOver = function () {
     clearInterval(this.timerId);
+    clearInterval(self.yeti.timerEnemyMvt);
+    clearInterval(this.timerBlowBomb);
+    clearInterval(this.timerExpandBomb);
     musicini.pause();
-    this.gamemusic.pause();
+    this.gameMusic.pause();
     this.herodead.play();
     self.penguin.direction = "dead";
     self.yeti.direction = "win";
@@ -419,7 +420,7 @@ function IcePinguin() {
     setTimeout(function () {
       self.container.style.display = "none";
       self.main.style.backgroundImage =
-        "url(/source/graphics/fondogameover.png)";
+        "url(./assets/graphics/fondogameover.png)";
       self.main.style.display = "block";
       self.main.style.height = "100%";
       self.main.style.width = "100%";
@@ -431,8 +432,8 @@ function IcePinguin() {
   //StartGame
   this.startGame = function () {
     musicini.pause();
-    this.gamemusic.play();
-    this.gamemusic.addEventListener(
+    self.gameMusic.play();
+    self.gameMusic.addEventListener(
       "ended",
       function () {
         this.currentTime = 0;
@@ -453,7 +454,7 @@ function IcePinguin() {
 }
 
 //Game
-//musicini.play();
+musicini.play();
 btnMain.onclick = function () {
   game = new IcePinguin();
   game.audiobtn.play();

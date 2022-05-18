@@ -7,15 +7,11 @@ function Enemy() {
   this.height = 50;
   this.posX = 480;
   this.posY = 360;
-
+  this.timerEnemyMvt;
   this.enemyGenerate = function () {
     this.enemy = document.createElement("div");
     this.enemy.id = "enemy";
     map.appendChild(this.enemy);
-  };
-
-  this.enemyDead = function () {
-    console.log("funcion EnemyDead");
   };
 
   this.deleteEnemy = function () {
@@ -79,27 +75,27 @@ function Enemy() {
     switch (this.direction) {
       case "up":
         game.yeti.enemy.style.backgroundImage =
-          "url(/source/graphics/yetiright.png)";
+          "url(./assets/graphics/yetiright.png)";
         break;
       case "right":
         game.yeti.enemy.style.backgroundImage =
-          "url(/source/graphics/yetiright.png)";
+          "url(./assets/graphics/yetiright.png)";
         break;
       case "down":
         game.yeti.enemy.style.backgroundImage =
-          "url(/source/graphics/yetileft.png)";
+          "url(./assets/graphics/yetileft.png)";
         break;
       case "left":
         game.yeti.enemy.style.backgroundImage =
-          "url(/source/graphics/yetileft.png)";
+          "url(./assets/graphics/yetileft.png)";
         break;
       case "none":
         game.yeti.enemy.style.backgroundImage =
-          "url(/source/graphics/yetileft.png)";
+          "url(./assets/graphics/yetileft.png)";
         break;
       case "dead":
         game.yeti.enemy.style.backgroundImage =
-          "url(/source/graphics/yetidead2.png)";
+          "url(./assets/graphics/yetidead2.png)";
         break;
     }
   };

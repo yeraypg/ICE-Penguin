@@ -55,27 +55,27 @@ function Hero() {
     switch (this.direction) {
       case "up":
         game.penguin.hero.style.backgroundImage =
-          "url(/source/graphics/penguiupanim.png)";
+          "url(./assets/graphics/penguiupanim.png)";
         break;
       case "right":
         game.penguin.hero.style.backgroundImage =
-          "url(/source/graphics/penguirightanim.png)";
+          "url(./assets/graphics/penguirightanim.png)";
         break;
       case "down":
         game.penguin.hero.style.backgroundImage =
-          "url(/source/graphics/penguidownanim.png)";
+          "url(./assets/graphics/penguidownanim.png)";
         break;
       case "left":
         game.penguin.hero.style.backgroundImage =
-          "url(/source/graphics/penguileftanim.png)";
+          "url(./assets/graphics/penguileftanim.png)";
         break;
       case "none":
         game.penguin.hero.style.backgroundImage =
-          "url(/source/graphics/penguistop.png)";
+          "url(./assets/graphics/penguistop.png)";
         break;
       case "dead":
         game.penguin.hero.style.backgroundImage =
-          "url(/source/graphics/penguidead.png)";
+          "url(./assets/graphics/penguidead.png)";
         break;
     }
   };
