@@ -12,9 +12,9 @@ function IcePinguin() {
   this.timerId;
   this.timerBlowBomb;
   this.timerExpandBomb;
-  this.penguin = new Hero();  
-  this.yeti4 = new Enemy (240, 360);
-  this.yeti3 = new Enemy (360, 360);
+  this.penguin = new Hero();
+  this.yeti4 = new Enemy(240, 360);
+  this.yeti3 = new Enemy(360, 360);
   this.yeti2 = new Enemy(600, 360);
   this.yeti = new Enemy(480, 360);
   this.bombs = new Array();
@@ -27,7 +27,7 @@ function IcePinguin() {
   this.herowin = new Audio("./assets/sounds/musicwin.wav");
   this.placeBomb = new Audio("./assets/sounds/placebomb.ogg");
   this.blowBomb = new Audio("./assets/sounds/blowbomb.mp3");
-  this.yetidead = new Audio("./assets/sounds/yetidead1.mp3")
+  this.yetidead = new Audio("./assets/sounds/yetidead1.mp3");
 
   // Ice-Block Map Position
   this.tableMap = [
@@ -516,16 +516,16 @@ function IcePinguin() {
     //this.herowin.play();
     this.yetidead.play();
     self.penguin.direction = "win";
-    self[char].direction = "dead";    
+    self[char].direction = "dead";
     game.penguin.style();
     game[char].style();
-    self[char].paintEnemy();    
+    self[char].paintEnemy();
     clearInterval(self[char].timerEnemyMvt);
-    self[char].posX = 2000
+    self[char].posX = 2000;
     setTimeout(function () {
       game[char].deleteEnemy();
       self[char].posX = 2000;
-      self[char].posY = 2000;      
+      self[char].posY = 2000;
     }, 2000);
   };
 

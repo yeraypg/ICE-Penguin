@@ -158,7 +158,7 @@ tr {
 .bomb {
   
   position: absolute;
-  background: url(/assets/graphics/bola\ nieve\ 1.png);
+  background: url(../assets/graphics/bola\ nieve\ 1.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 35px 35px;
@@ -218,7 +218,7 @@ tr {
     background-position: 0px;
   }
   100% {
-    background-position: -180px;
+    background-position: -175px;
   }
 }
 
