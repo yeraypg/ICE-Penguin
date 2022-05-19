@@ -156,14 +156,15 @@ tr {
 }
 
 .bomb {
-  z-index: 1;
+  
   position: absolute;
-  background: url(../assets/graphics/bola\ nieve\ 1.png);
+  background: url(/assets/graphics/bola\ nieve\ 1.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 35px 35px;
   height: 35px;
   width: 35px;
+  
 }
 
 .bomb-blow {
@@ -227,5 +228,14 @@ tr {
   }
   100% {
     background-position: -105px;
+  }
+}
+
+@keyframes bolanieve {
+  0% {
+    background-position: 0px;
+  }
+  100% {
+    background-position: -180px;
   }
 }

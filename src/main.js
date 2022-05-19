@@ -12,8 +12,11 @@ function IcePinguin() {
   this.timerId;
   this.timerBlowBomb;
   this.timerExpandBomb;
-  this.penguin = new Hero();
-  this.yeti = new Enemy();
+  this.penguin = new Hero();  
+  this.yeti4 = new Enemy (240, 360);
+  this.yeti3 = new Enemy (360, 360);
+  this.yeti2 = new Enemy(600, 360);
+  this.yeti = new Enemy(480, 360);
   this.bombs = new Array();
   this.iceBlockHeight = 62;
   this.iceBlockWidth = 60;
@@ -24,6 +27,7 @@ function IcePinguin() {
   this.herowin = new Audio("./assets/sounds/musicwin.wav");
   this.placeBomb = new Audio("./assets/sounds/placebomb.ogg");
   this.blowBomb = new Audio("./assets/sounds/blowbomb.mp3");
+  this.yetidead = new Audio("./assets/sounds/yetidead1.mp3")
 
   // Ice-Block Map Position
   this.tableMap = [
@@ -68,17 +72,24 @@ function IcePinguin() {
   this.exitBtn = function () {
     this.btnExit.addEventListener("click", function (e) {
       game.audiobtn.play();
-      clearInterval(this.timerId);
+      clearInterval(self.timerId);
       clearInterval(self.yeti.timerEnemyMvt);
-      clearInterval(this.timerBlowBomb);
-      clearInterval(this.timerExpandBomb);
+      clearInterval(self.yeti2.timerEnemyMvt);
+      clearInterval(self.yeti3.timerEnemyMvt);
+      clearInterval(self.yeti4.timerEnemyMvt);
+      clearInterval(self.timerBlowBomb);
+      clearInterval(self.timerExpandBomb);
       musicini.pause();
       self.gameMusic.pause();
-      self.main.style.backgroundImage = "url(./assets/graphics/fondoinicio.png)";
+      self.main.style.backgroundImage =
+        "url(./assets/graphics/fondoinicio.png)";
       self.container.style.display = "none";
       self.main.style.display = "block";
       game.penguin.deleteHero();
       game.yeti.deleteEnemy();
+      game.yeti2.deleteEnemy();
+      game.yeti3.deleteEnemy();
+      game.yeti4.deleteEnemy();
     });
   };
 
@@ -138,10 +149,40 @@ function IcePinguin() {
     bombExpand.style.left = self.bombs[0].posX + "px";
     if (self.bombs[0].posY > 60) {
       this.map.appendChild(bombExpand);
-      if (self.yeti.posX < (self.bombs[0].posX + 50) &&
-        (self.yeti.posX + self.yeti.height) > self.bombs[0].posX &&
-        (self.yeti.posY + self.yeti.height) > (self.bombs[0].posY - 180) &&
-        self.yeti.posY < self.bombs[0].posY) { self.gameWin(); }
+      if (
+        self.yeti.posX < self.bombs[0].posX + 50 &&
+        self.yeti.posX + self.yeti.height > self.bombs[0].posX &&
+        self.yeti.posY + self.yeti.height > self.bombs[0].posY - 180 &&
+        self.yeti.posY < self.bombs[0].posY
+      ) {
+        self.gameWin("yeti");
+      }
+      if (
+        self.yeti2.posX < self.bombs[0].posX + 50 &&
+        self.yeti2.posX + self.yeti2.height > self.bombs[0].posX &&
+        self.yeti2.posY + self.yeti2.height > self.bombs[0].posY - 180 &&
+        self.yeti2.posY < self.bombs[0].posY
+      ) {
+        self.gameWin("yeti2");
+      }
+      if (
+        self.yeti3.posX < self.bombs[0].posX + 50 &&
+        self.yeti3.posX + self.yeti3.height > self.bombs[0].posX &&
+        self.yeti3.posY + self.yeti3.height > self.bombs[0].posY - 180 &&
+        self.yeti3.posY < self.bombs[0].posY
+      ) {
+        self.gameWin("yeti3");
+      }
+
+      if (
+        self.yeti4.posX < self.bombs[0].posX + 50 &&
+        self.yeti4.posX + self.yeti4.height > self.bombs[0].posX &&
+        self.yeti4.posY + self.yeti4.height > self.bombs[0].posY - 180 &&
+        self.yeti4.posY < self.bombs[0].posY
+      ) {
+        self.gameWin("yeti4");
+      }
+
       timerExpandBomb = setTimeout(function () {
         self.deleteExpand(bombExpand.id);
       }, 1000);
@@ -159,8 +200,38 @@ function IcePinguin() {
       if (
         self.yeti.posX < self.bombs[0].posX + 50 &&
         self.yeti.posX + self.yeti.height > self.bombs[0].posX &&
-        self.yeti.posY < (self.bombs[0].posY + 240) &&
-        self.yeti.posY > self.bombs[0].posY) { self.gameWin(); }
+        self.yeti.posY < self.bombs[0].posY + 240 &&
+        self.yeti.posY > self.bombs[0].posY
+      ) {
+        self.gameWin("yeti");
+      }
+      if (
+        self.yeti2.posX < self.bombs[0].posX + 50 &&
+        self.yeti2.posX + self.yeti2.height > self.bombs[0].posX &&
+        self.yeti2.posY < self.bombs[0].posY + 240 &&
+        self.yeti2.posY > self.bombs[0].posY
+      ) {
+        self.gameWin("yeti2");
+      }
+
+      if (
+        self.yeti3.posX < self.bombs[0].posX + 50 &&
+        self.yeti3.posX + self.yeti3.height > self.bombs[0].posX &&
+        self.yeti3.posY < self.bombs[0].posY + 240 &&
+        self.yeti3.posY > self.bombs[0].posY
+      ) {
+        self.gameWin("yeti3");
+      }
+
+      if (
+        self.yeti4.posX < self.bombs[0].posX + 50 &&
+        self.yeti4.posX + self.yeti4.height > self.bombs[0].posX &&
+        self.yeti4.posY < self.bombs[0].posY + 240 &&
+        self.yeti4.posY > self.bombs[0].posY
+      ) {
+        self.gameWin("yeti4");
+      }
+
       timerExpandBomb = setTimeout(function () {
         self.deleteExpand(bombExpand.id);
       }, 1000);
@@ -178,8 +249,36 @@ function IcePinguin() {
       if (
         self.yeti.posX > self.bombs[0].posX - 180 &&
         self.yeti.posY + self.yeti.height > self.bombs[0].posY &&
-        self.yeti.posY < (self.bombs[0].posY + 60) &&
-        self.yeti.posX < self.bombs[0].posX) { self.gameWin(); }
+        self.yeti.posY < self.bombs[0].posY + 60 &&
+        self.yeti.posX < self.bombs[0].posX
+      ) {
+        self.gameWin("yeti");
+      }
+      if (
+        self.yeti2.posX > self.bombs[0].posX - 180 &&
+        self.yeti2.posY + self.yeti2.height > self.bombs[0].posY &&
+        self.yeti2.posY < self.bombs[0].posY + 60 &&
+        self.yeti2.posX < self.bombs[0].posX
+      ) {
+        self.gameWin("yeti2");
+      }
+      if (
+        self.yeti3.posX > self.bombs[0].posX - 180 &&
+        self.yeti3.posY + self.yeti3.height > self.bombs[0].posY &&
+        self.yeti3.posY < self.bombs[0].posY + 60 &&
+        self.yeti3.posX < self.bombs[0].posX
+      ) {
+        self.gameWin("yeti3");
+      }
+      if (
+        self.yeti4.posX > self.bombs[0].posX - 180 &&
+        self.yeti4.posY + self.yeti4.height > self.bombs[0].posY &&
+        self.yeti4.posY < self.bombs[0].posY + 60 &&
+        self.yeti4.posX < self.bombs[0].posX
+      ) {
+        self.gameWin("yeti4");
+      }
+
       timerExpandBomb = setTimeout(function () {
         self.deleteExpand(bombExpand.id);
       }, 1000);
@@ -197,8 +296,36 @@ function IcePinguin() {
       if (
         self.yeti.posX < self.bombs[0].posX + 240 &&
         self.yeti.posY + self.yeti.height > self.bombs[0].posY &&
-        self.yeti.posY < (self.bombs[0].posY + 60) &&
-        self.yeti.posX + self.yeti.height > self.bombs[0].posX) { self.gameWin(); }
+        self.yeti.posY < self.bombs[0].posY + 60 &&
+        self.yeti.posX + self.yeti.height > self.bombs[0].posX
+      ) {
+        self.gameWin("yeti");
+      }
+      if (
+        self.yeti2.posX < self.bombs[0].posX + 240 &&
+        self.yeti2.posY + self.yeti2.height > self.bombs[0].posY &&
+        self.yeti2.posY < self.bombs[0].posY + 60 &&
+        self.yeti2.posX + self.yeti2.height > self.bombs[0].posX
+      ) {
+        self.gameWin("yeti2");
+      }
+      if (
+        self.yeti3.posX < self.bombs[0].posX + 240 &&
+        self.yeti3.posY + self.yeti3.height > self.bombs[0].posY &&
+        self.yeti3.posY < self.bombs[0].posY + 60 &&
+        self.yeti3.posX + self.yeti3.height > self.bombs[0].posX
+      ) {
+        self.gameWin("yeti3");
+      }
+      if (
+        self.yeti4.posX < self.bombs[0].posX + 240 &&
+        self.yeti4.posY + self.yeti4.height > self.bombs[0].posY &&
+        self.yeti4.posY < self.bombs[0].posY + 60 &&
+        self.yeti4.posX + self.yeti4.height > self.bombs[0].posX
+      ) {
+        self.gameWin("yeti4");
+      }
+
       timerExpandBomb = setTimeout(function () {
         self.deleteExpand(bombExpand.id);
       }, 1000);
@@ -259,14 +386,29 @@ function IcePinguin() {
   };
   this.moveControl = function () {
     self.charCollision("penguin", "yeti");
+    self.charCollision("penguin", "yeti2");
+    self.charCollision("penguin", "yeti3");
+    self.charCollision("penguin", "yeti4");
     self.borderCollision("penguin");
     self.borderCollision("yeti");
+    self.borderCollision("yeti2");
+    self.borderCollision("yeti3");
+    self.borderCollision("yeti4");
     self.iceBlockCollision("penguin");
+    self.iceBlockCollision("yeti2");
+    self.iceBlockCollision("yeti3");
+    self.iceBlockCollision("yeti4");
     self.iceBlockCollision("yeti");
     self.asignMovement("penguin");
     self.asignMovement("yeti");
+    self.asignMovement("yeti2");
+    self.asignMovement("yeti3");
+    self.asignMovement("yeti4");
     self.penguin.paintHero();
     self.yeti.paintEnemy();
+    self.yeti2.paintEnemy();
+    self.yeti3.paintEnemy();
+    self.yeti4.paintEnemy();
   };
 
   //Detect Ice Block Collision
@@ -276,7 +418,7 @@ function IcePinguin() {
         case "right":
           if (
             self[char].posX + self[char].height + self[char].speed >
-            self.tableMap[i].posX &&
+              self.tableMap[i].posX &&
             self[char].posY + self[char].height > self.tableMap[i].posY &&
             self[char].posY < self.tableMap[i].posY + this.iceBlockHeight
           ) {
@@ -286,7 +428,7 @@ function IcePinguin() {
         case "down":
           if (
             self[char].posY + self[char].height + self[char].speed >
-            self.tableMap[i].posY &&
+              self.tableMap[i].posY &&
             self[char].posX < self.tableMap[i].posX + this.iceBlockWidth &&
             self[char].posX + self[char].height > self.tableMap[i].posX
           ) {
@@ -296,7 +438,7 @@ function IcePinguin() {
         case "left":
           if (
             self[char].posX + self[char].speed <
-            self.tableMap[i].posX + this.iceBlockWidth &&
+              self.tableMap[i].posX + this.iceBlockWidth &&
             self[char].posY + self[char].height > self.tableMap[i].posY &&
             self[char].posY < self.tableMap[i].posY + this.iceBlockHeight
           ) {
@@ -306,7 +448,7 @@ function IcePinguin() {
         case "up":
           if (
             self[char].posY + self[char].speed >
-            self.tableMap[i].posY + this.iceBlockHeight &&
+              self.tableMap[i].posY + this.iceBlockHeight &&
             self[char].posX < self.tableMap[i].posX + this.iceBlockWidth &&
             self[char].posX + self[char].height > self.tableMap[i].posX
           ) {
@@ -314,18 +456,6 @@ function IcePinguin() {
           }
           break;
       }
-    }
-  };
-
-  // Detect Bomb-Enemy Collision
-  this.bombCollision = function (char1, char2) {
-    if (
-      self[char1].posX < self[char2].posX + self[char2].height &&
-      self[char1].posX + self[char1].height > self[char2].posX &&
-      self[char1].posY < self[char2].posY + self[char2].height &&
-      self[char1].height + self[char1].posY > self[char2].posY
-    ) {
-      this.gameOver();
     }
   };
 
@@ -380,34 +510,32 @@ function IcePinguin() {
 
   // Game Win
 
-  this.gameWin = function () {
-    musicini.pause();
-    this.gameMusic.pause();
-    this.herowin.play();
+  this.gameWin = function (char) {
+    //musicini.pause();
+    //this.gameMusic.pause();
+    //this.herowin.play();
+    this.yetidead.play();
     self.penguin.direction = "win";
-    self.yeti.direction = "dead";
+    self[char].direction = "dead";    
     game.penguin.style();
-    game.yeti.style();
-    self.yeti.paintEnemy();
-    clearInterval(this.timerId);
-    clearInterval(self.yeti.timerEnemyMvt);
-    clearInterval(this.timerBlowBomb);
-    clearInterval(this.timerExpandBomb);
+    game[char].style();
+    self[char].paintEnemy();    
+    clearInterval(self[char].timerEnemyMvt);
+    self[char].posX = 2000
     setTimeout(function () {
-      self.container.style.display = "none";
-      self.main.style.backgroundImage = "url(./assets/graphics/fondowin.png)";
-      self.main.style.display = "block";
-      self.main.style.height = "100%";
-      self.main.style.width = "100%";
-      game.penguin.deleteHero();
-      game.yeti.deleteEnemy();
-    }, 1500);
+      game[char].deleteEnemy();
+      self[char].posX = 2000;
+      self[char].posY = 2000;      
+    }, 2000);
   };
 
   // Game Over
   this.gameOver = function () {
     clearInterval(this.timerId);
     clearInterval(self.yeti.timerEnemyMvt);
+    clearInterval(self.yeti2.timerEnemyMvt);
+    clearInterval(self.yeti3.timerEnemyMvt);
+    clearInterval(self.yeti4.timerEnemyMvt);
     clearInterval(this.timerBlowBomb);
     clearInterval(this.timerExpandBomb);
     musicini.pause();
@@ -415,8 +543,14 @@ function IcePinguin() {
     this.herodead.play();
     self.penguin.direction = "dead";
     self.yeti.direction = "win";
+    self.yeti2.direction = "win";
+    self.yeti3.direction = "win";
+    self.yeti4.direction = "win";
     game.penguin.style();
     game.yeti.style();
+    game.yeti2.style();
+    game.yeti3.style();
+    game.yeti4.style();
     setTimeout(function () {
       self.container.style.display = "none";
       self.main.style.backgroundImage =
@@ -426,6 +560,9 @@ function IcePinguin() {
       self.main.style.width = "100%";
       game.penguin.deleteHero();
       game.yeti.deleteEnemy();
+      game.yeti2.deleteEnemy();
+      game.yeti3.deleteEnemy();
+      game.yeti4.deleteEnemy();
     }, 1500);
   };
 
@@ -448,7 +585,13 @@ function IcePinguin() {
     self.generateIceMap();
     self.penguin.heroGenerate();
     self.yeti.enemyGenerate();
-    self.yeti.movementrdm();
+    self.yeti2.enemyGenerate();
+    self.yeti3.enemyGenerate();
+    self.yeti4.enemyGenerate();
+    self.yeti2.movementrdm("yeti");
+    self.yeti2.movementrdm("yeti2");
+    self.yeti3.movementrdm("yeti3");
+    self.yeti4.movementrdm("yeti4");
     this.timerId = setInterval(this.moveControl, 0.1);
   };
 }
