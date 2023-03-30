@@ -3,7 +3,7 @@ function Enemy(posX, posY) {
   this.idMovement;
   this.enemy = document.getElementById("enemy");
   this.direction = "none";
-  this.speed = 2.5;
+  this.speed = 1;
   this.height = 50;
   this.posX = posX;
   this.posY = posY;
